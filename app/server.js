@@ -13,6 +13,10 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
+app.get("/game", function (request, response) {
+  response.sendFile(__dirname + '/views/game.html');
+});
+
 
 //-------------------------------------------------------------//
 
@@ -60,7 +64,7 @@ app.get('/search', function (request, response) {
   //console.log(request.headers['authorization'].split(' ')[1]);
   loggedInSpotifyApi.setAccessToken(request.headers['authorization'].split(' ')[1]);
 
-  let query = 'track:' + request.query.query;
+  let query = 'track:' + request.query.input;
 
   loggedInSpotifyApi.searchTracks(query)
   .then(function(data) {

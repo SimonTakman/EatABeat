@@ -1,8 +1,10 @@
+var player;
+
 function initPlayback() {
   window.onSpotifyWebPlaybackSDKReady = () => {
     const token = Cookies.get('access_token');
     if (token) {
-      const player = new Spotify.Player({
+      player = new Spotify.Player({
         name: 'Grupp4 Player',
         getOAuthToken: cb => { cb(token); }
       });
@@ -23,7 +25,7 @@ function initPlayback() {
     // Ready
     player.on('ready', data => {
       console.log('Ready with Device ID', data.device_id);
-      play(data.device_id);
+      play(data.device_id, Cookies.get('track_id'));
     });
 
     // Connect to the player!
@@ -33,17 +35,21 @@ function initPlayback() {
 }
 
 // Play a specified track on the Web Playback SDK's device ID
-function play(device_id) {
+function play(device_id, track_id) {
   const token = Cookies.get('access_token');
-  if (token) {
+  if (token && track_id) {
     $.ajax({
      url: "https://api.spotify.com/v1/me/player/play?device_id=" + device_id,
      type: "PUT",
-     data: '{"uris": ["spotify:track:5ya2gsaIhTkAuWYEMB0nw5"]}',
+     data: '{"uris": ["spotify:track:' + track_id +'"]}',
      beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + token );},
      success: function(data) {
-       console.log(data)
+       console.log(data);
      }
     });
   }
+}
+
+function pause() {
+
 }

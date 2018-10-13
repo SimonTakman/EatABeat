@@ -5,17 +5,8 @@
 // add other scripts at the bottom of index.html
 
 $(function() {
-  var access_token;
-  $('#logout').hide();
-  $('#login').hide();
-
-  $('#login').click(function() {
-    // Call the authorize endpoint, which will return an authorize URL, then redirect to that URL
-    $.get('/authorize', function(data) {
-      console.log(data)
-      window.location = data;
-    });
-  });
+  $('body').hide();
+  var access_token, track_id, device_id; // Device id used for playback SDK
 
   $('#logout').click(function() {
     Cookies.remove('access_token');
@@ -33,31 +24,27 @@ $(function() {
       return initial;
     }, {});
     window.location.hash = '';
-
-  if (hash.access_token) {
-    var expires_in = new Date(new Date().getTime() + hash.expires_in*1000);
-    Cookies.set('access_token', hash.access_token, {expires: expires_in});
-    console.log(hash.expires_in);
-    window.location.href = '/';
+  if (hash.track_id) {
+    Cookies.set('track_id', hash.track_id);
+    window.location.href = '/game';
   }
 
   access_token = Cookies.get('access_token');
-  if (access_token) {
+  track_id = Cookies.get('track_id');
+  if (access_token && track_id) {
     // Logged in
     //console.log("Logged in");
-    $('#logout').show();
-    $('#login').hide();
+    $('body').show();
     // Get logged in user info
     $.get({url: '/me', headers: {"Authorization": `Bearer ${access_token}`}}, function(data) {
       // "Data" is the array of track objects we get from the API. See server.js for the function that returns it.
       console.log(data);
     });
-    initPlayback(access_token);
+    initPlayback();
+
   }
   else {
     // Not logged in
-    $('#logout').hide();
-    $('#login').show();
+    window.location.href = '/';
   }
-
 });
