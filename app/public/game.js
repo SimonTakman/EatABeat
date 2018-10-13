@@ -1,8 +1,9 @@
 const COLORS = [
-    { main: 0xCEF564, complement: 0x1E3264 },
-    { main: 0xF573A1, complement: 0xC3F0C9 },
-    { main: 0xFFC864, complement: 0x9FC3D1 },
-    { main: 0xFFCCD3, complement: 0x9FC3D1 }
+    { main: 0xC39486, complement: 0x8C1932 },   // n3x2
+    { main: 0xF6E82B, complement: 0x213263 },   // n1x1
+    { main: 0xFFCFD6, complement: 0xEF1E31 },   // n2x3
+    { main: 0xFFCFD6, complement: 0x006456 },   // n1x2
+    { main: 0xFFC864, complement: 0x4C9173 }    // 3x4
 ];
 
 class Game {
@@ -20,6 +21,7 @@ class Game {
         };
         this.startTime = (new Date()).getTime();
         this.playerRadius = 18;
+        this.isDamaging = false;
 
         // Clear container
         while (container.firstChild) {
@@ -32,6 +34,7 @@ class Game {
         this.addPlayer();
         this.addScore();
         this.addExit();
+        this.addOuch();
         this.app.ticker.add((delta) => this.onTickEvent(delta));
 
         // Mouse move to move player
@@ -129,7 +132,40 @@ class Game {
 
     setTrack(track) {
         this.track = track;
-        this.track.analysis.bars = [this.track.analysis.bars[0], this.track.analysis.bars[1]];
+        //this.track.analysis.bars = [this.track.analysis.bars[0], this.track.analysis.bars[1]];
+    }
+
+    lightenColor(colorCode, amount) {
+        console.log("Before", colorCode.toString(16));
+        var num = parseInt(colorCode, 16);
+    
+        var r = (num >> 16) + amount;
+    
+        if (r > 255) {
+            r = 255;
+        } else if (r < 0) {
+            r = 0;
+        }
+    
+        var b = ((num >> 8) & 0x00FF) + amount;
+    
+        if (b > 255) {
+            b = 255;
+        } else if (b < 0) {
+            b = 0;
+        }
+    
+        var g = (num & 0x0000FF) + amount;
+    
+        if (g > 255) {
+            g = 255;
+        } else if (g < 0) {
+            g = 0;
+        }
+    
+        let newColor = (g | (b << 8) | (r << 16));
+        console.log("Before", newColor.toString(16));
+        return newColor;
     }
 
     setColor() {
@@ -138,6 +174,12 @@ class Game {
             let colorIndex = Math.round(Math.random() * (COLORS.length - 1));
             newColor = COLORS[colorIndex];
         } while (newColor == this.color);
+        /*let valence = Math.round(this.track.features.valence * 100) - 25;
+        valence = 0;
+        this.color = {
+            main: this.lightenColor(newColor.main, valence),
+            complement: this.lightenColor(newColor.complement, valence)
+        };*/
         this.color = newColor;
     }
 
@@ -171,7 +213,12 @@ class Game {
 
     addScore() {
         let scoreText = new PIXI.Text("",
-            {fontFamily : 'Courier New', fontSize: 20, fill : this.color.complement }
+            { 
+                fontFamily : 'Courier New', 
+                fontSize: 20, 
+                fontWeight: 'bold',
+                fill: this.color.complement 
+            }
         );
         scoreText.x = 20;
         scoreText.y = 20;
@@ -180,11 +227,33 @@ class Game {
         this.updateScore();
     }
 
+    addOuch() {
+        let ouchText = new PIXI.Text("OUCH!",
+            { 
+                fontFamily : 'Courier New', 
+                fontSize: 30, 
+                fontWeight: 'bold',
+                fill: 0xFF0000
+            }
+        );
+        ouchText.visible = false;
+        ouchText.x = this.app.renderer.width / 2 - 50;
+        ouchText.y = this.app.renderer.height / 2;
+        this.app.stage.addChild(ouchText);
+        this.elements.ouch = ouchText;
+        this.updateScore();
+    }
+
     addExit() {
         let exitText = new PIXI.Text("EXIT",
-            {fontFamily : 'Courier New', fontSize: 24, fill : this.color.complement }
+            {
+                fontFamily : 'Courier New', 
+                fontSize: 24, 
+                fontWeight: 'bold',
+                fill: this.color.complement 
+            }
         );
-        exitText.x = this.app.renderer.width - 100;
+        exitText.x = this.app.renderer.width - 80;
         exitText.y = 20;
         exitText.interactive = true;
         exitText.buttonMode = true;
@@ -218,20 +287,28 @@ class Game {
                 ob.x < playerX + playerWidth && 
                 ob.y + ob.height > playerY && 
                 ob.y < playerY + playerHeight;
-            if (isColiding) {
-                if (this.obstacles[i] == this.lastCollision)
-                    return false;
-                this.lastCollision = this.obstacles[i];
-                return true;
-            }
+            if (isColiding)
+                return i;
         }
-        return false;
+        return -1;
     }
 
     updatePlayerCollision() {
-        if (this.isPlayerColliding()) {
+        let index = this.isPlayerColliding();
+        if (index >= 0) {
             this.hits += 1;
             this.updateScore()
+            this.app.stage.removeChild(this.obstacles[index]);
+            this.obstacles.splice(index, 1);
+            this.elements.player.tint = 0xFF0000;
+            this.elements.score.style.fill = 0xFF0000;
+            this.elements.ouch.visible = true;
+        } else if(this.elements.ouch.visible && !this.isDamaging) {
+            setTimeout(() => {
+                this.elements.score.style.fill = this.color.complement;
+                this.elements.player.tint = this.color.complement;
+                this.elements.ouch.visible = false;
+            }, 200)
         }
     }
 
@@ -239,7 +316,8 @@ class Game {
         const parent = this.app.view.parentNode;
         this.app.renderer.resize(parent.clientWidth, parent.clientHeight);
         this.elements.player.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
-        this.elements.exit.position.set(this.app.renderer.width - 100, 20);
+        this.elements.exit.position.set(this.app.renderer.width - 80, 20);
+        this.elements.ouch.position.set(this.app.renderer.width / 2 - 50, this.app.renderer.height / 2);
         console.log("Using width: ", this.app.renderer.width, " and height: ", this.app.renderer.height);
     }
 }
