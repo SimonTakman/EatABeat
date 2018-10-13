@@ -1,0 +1,2534 @@
+let mock = JSON.stringify({
+    "track": {
+        "duration_ms" : 207960
+    },
+    "features": {
+        "danceability" : 0.696,
+        "energy" : 0.905,
+        "loudness" : -2.743,
+        "liveness" : 0.302,
+        "valence" : 0.625,
+        "tempo" : 114.944
+    },
+    "analysis": {
+        "bars": [
+            {
+                "start": 0.49567,
+                "duration": 2.18749,
+                "confidence": 0.925
+            },
+            {
+                "start": 2.68316,
+                "duration": 2.10995,
+                "confidence": 0.707
+            },
+            {
+                "start": 4.79311,
+                "duration": 2.17781,
+                "confidence": 0.091
+            },
+            {
+                "start": 6.97092,
+                "duration": 2.22058,
+                "confidence": 0.093
+            },
+            {
+                "start": 9.19150,
+                "duration": 2.23333,
+                "confidence": 0.207
+            },
+            {
+                "start": 11.42483,
+                "duration": 2.24668,
+                "confidence": 0.506
+            },
+            {
+                "start": 13.67151,
+                "duration": 2.22630,
+                "confidence": 0.818
+            },
+            {
+                "start": 15.89782,
+                "duration": 2.18375,
+                "confidence": 0.126
+            },
+            {
+                "start": 18.08157,
+                "duration": 2.12620,
+                "confidence": 0.302
+            },
+            {
+                "start": 20.20777,
+                "duration": 2.27342,
+                "confidence": 0.652
+            },
+            {
+                "start": 22.48119,
+                "duration": 2.26574,
+                "confidence": 0.881
+            },
+            {
+                "start": 24.74693,
+                "duration": 2.16735,
+                "confidence": 0.604
+            },
+            {
+                "start": 26.91428,
+                "duration": 2.12009,
+                "confidence": 0.693
+            },
+            {
+                "start": 29.03437,
+                "duration": 0.52165,
+                "confidence": 0.256
+            },
+            {
+                "start": 29.55603,
+                "duration": 2.08912,
+                "confidence": 0.232
+            },
+            {
+                "start": 31.64515,
+                "duration": 2.08389,
+                "confidence": 0.389
+            },
+            {
+                "start": 33.72904,
+                "duration": 2.07887,
+                "confidence": 0.461
+            },
+            {
+                "start": 35.80790,
+                "duration": 2.07976,
+                "confidence": 0.547
+            },
+            {
+                "start": 37.88766,
+                "duration": 2.09136,
+                "confidence": 0.538
+            },
+            {
+                "start": 39.97902,
+                "duration": 2.08923,
+                "confidence": 0.660
+            },
+            {
+                "start": 42.06825,
+                "duration": 2.08642,
+                "confidence": 0.157
+            },
+            {
+                "start": 44.15467,
+                "duration": 2.08653,
+                "confidence": 0.449
+            },
+            {
+                "start": 46.24120,
+                "duration": 2.09244,
+                "confidence": 0.637
+            },
+            {
+                "start": 48.33364,
+                "duration": 2.08751,
+                "confidence": 0.546
+            },
+            {
+                "start": 50.42115,
+                "duration": 2.08000,
+                "confidence": 0.376
+            },
+            {
+                "start": 52.50116,
+                "duration": 2.09073,
+                "confidence": 0.602
+            },
+            {
+                "start": 54.59189,
+                "duration": 2.09302,
+                "confidence": 0.237
+            },
+            {
+                "start": 56.68492,
+                "duration": 2.08203,
+                "confidence": 0.743
+            },
+            {
+                "start": 58.76694,
+                "duration": 2.08357,
+                "confidence": 0.646
+            },
+            {
+                "start": 60.85051,
+                "duration": 2.08549,
+                "confidence": 0.656
+            },
+            {
+                "start": 62.93600,
+                "duration": 2.08561,
+                "confidence": 0.410
+            },
+            {
+                "start": 65.02161,
+                "duration": 2.08565,
+                "confidence": 0.693
+            },
+            {
+                "start": 67.10726,
+                "duration": 2.09163,
+                "confidence": 0.234
+            },
+            {
+                "start": 69.19889,
+                "duration": 1.56302,
+                "confidence": 0.585
+            },
+            {
+                "start": 70.76191,
+                "duration": 2.08663,
+                "confidence": 0.457
+            },
+            {
+                "start": 72.84854,
+                "duration": 2.09968,
+                "confidence": 0.546
+            },
+            {
+                "start": 74.94822,
+                "duration": 2.08695,
+                "confidence": 0.657
+            },
+            {
+                "start": 77.03517,
+                "duration": 2.08232,
+                "confidence": 0.561
+            },
+            {
+                "start": 79.11749,
+                "duration": 2.08797,
+                "confidence": 0.895
+            },
+            {
+                "start": 81.20546,
+                "duration": 2.08418,
+                "confidence": 0.828
+            },
+            {
+                "start": 83.28964,
+                "duration": 2.08409,
+                "confidence": 0.686
+            },
+            {
+                "start": 85.37373,
+                "duration": 2.08971,
+                "confidence": 0.902
+            },
+            {
+                "start": 87.46344,
+                "duration": 2.08080,
+                "confidence": 0.180
+            },
+            {
+                "start": 89.54424,
+                "duration": 2.60865,
+                "confidence": 0.673
+            },
+            {
+                "start": 92.15290,
+                "duration": 2.09503,
+                "confidence": 0.270
+            },
+            {
+                "start": 94.24792,
+                "duration": 2.08477,
+                "confidence": 0.561
+            },
+            {
+                "start": 96.33269,
+                "duration": 2.08297,
+                "confidence": 0.617
+            },
+            {
+                "start": 98.41566,
+                "duration": 2.08399,
+                "confidence": 0.533
+            },
+            {
+                "start": 100.49965,
+                "duration": 2.09068,
+                "confidence": 0.554
+            },
+            {
+                "start": 102.59033,
+                "duration": 2.08722,
+                "confidence": 0.373
+            },
+            {
+                "start": 104.67755,
+                "duration": 2.08459,
+                "confidence": 0.260
+            },
+            {
+                "start": 106.76214,
+                "duration": 2.08610,
+                "confidence": 0.472
+            },
+            {
+                "start": 108.84824,
+                "duration": 2.09516,
+                "confidence": 0.388
+            },
+            {
+                "start": 110.94340,
+                "duration": 2.08536,
+                "confidence": 0.578
+            },
+            {
+                "start": 113.02876,
+                "duration": 2.08117,
+                "confidence": 0.117
+            },
+            {
+                "start": 115.10993,
+                "duration": 2.08953,
+                "confidence": 0.704
+            },
+            {
+                "start": 117.19946,
+                "duration": 2.09320,
+                "confidence": 0.274
+            },
+            {
+                "start": 119.29266,
+                "duration": 2.08420,
+                "confidence": 0.632
+            },
+            {
+                "start": 121.37686,
+                "duration": 2.08658,
+                "confidence": 0.517
+            },
+            {
+                "start": 123.46345,
+                "duration": 2.08417,
+                "confidence": 0.671
+            },
+            {
+                "start": 125.54762,
+                "duration": 2.08272,
+                "confidence": 0.677
+            },
+            {
+                "start": 127.63034,
+                "duration": 2.08266,
+                "confidence": 0.485
+            },
+            {
+                "start": 129.71301,
+                "duration": 2.08537,
+                "confidence": 0.432
+            },
+            {
+                "start": 131.79838,
+                "duration": 2.09370,
+                "confidence": 0.415
+            },
+            {
+                "start": 133.89208,
+                "duration": 2.08810,
+                "confidence": 0.275
+            },
+            {
+                "start": 135.98018,
+                "duration": 2.08662,
+                "confidence": 0.367
+            },
+            {
+                "start": 138.06680,
+                "duration": 2.08377,
+                "confidence": 0.689
+            },
+            {
+                "start": 140.15058,
+                "duration": 2.08839,
+                "confidence": 0.454
+            },
+            {
+                "start": 142.23896,
+                "duration": 2.08789,
+                "confidence": 0.604
+            },
+            {
+                "start": 144.32686,
+                "duration": 2.08694,
+                "confidence": 0.437
+            },
+            {
+                "start": 146.41380,
+                "duration": 2.08697,
+                "confidence": 0.120
+            },
+            {
+                "start": 148.50077,
+                "duration": 2.09026,
+                "confidence": 0.568
+            },
+            {
+                "start": 150.59103,
+                "duration": 2.09083,
+                "confidence": 0.187
+            },
+            {
+                "start": 152.68186,
+                "duration": 2.08063,
+                "confidence": 0.481
+            },
+            {
+                "start": 154.76248,
+                "duration": 2.08333,
+                "confidence": 0.714
+            },
+            {
+                "start": 156.84582,
+                "duration": 2.08763,
+                "confidence": 0.570
+            },
+            {
+                "start": 158.93345,
+                "duration": 2.09084,
+                "confidence": 0.507
+            },
+            {
+                "start": 161.02428,
+                "duration": 2.08450,
+                "confidence": 0.728
+            },
+            {
+                "start": 163.10879,
+                "duration": 2.08893,
+                "confidence": 0.487
+            },
+            {
+                "start": 165.19771,
+                "duration": 2.08642,
+                "confidence": 0.591
+            },
+            {
+                "start": 167.28414,
+                "duration": 2.09055,
+                "confidence": 0.436
+            },
+            {
+                "start": 169.37469,
+                "duration": 2.08696,
+                "confidence": 0.514
+            },
+            {
+                "start": 171.46165,
+                "duration": 2.07944,
+                "confidence": 0.382
+            },
+            {
+                "start": 173.54109,
+                "duration": 2.09108,
+                "confidence": 0.421
+            },
+            {
+                "start": 175.63217,
+                "duration": 2.09423,
+                "confidence": 0.364
+            },
+            {
+                "start": 177.72640,
+                "duration": 2.07796,
+                "confidence": 0.636
+            },
+            {
+                "start": 179.80436,
+                "duration": 2.08638,
+                "confidence": 0.632
+            },
+            {
+                "start": 181.89073,
+                "duration": 2.09164,
+                "confidence": 0.264
+            },
+            {
+                "start": 183.98237,
+                "duration": 2.08185,
+                "confidence": 0.285
+            },
+            {
+                "start": 186.06422,
+                "duration": 2.08856,
+                "confidence": 0.772
+            },
+            {
+                "start": 188.15278,
+                "duration": 2.08847,
+                "confidence": 0.150
+            },
+            {
+                "start": 190.24125,
+                "duration": 2.08621,
+                "confidence": 0.479
+            },
+            {
+                "start": 192.32745,
+                "duration": 2.09087,
+                "confidence": 0.528
+            },
+            {
+                "start": 194.41832,
+                "duration": 2.08398,
+                "confidence": 0.261
+            },
+            {
+                "start": 196.50230,
+                "duration": 2.08674,
+                "confidence": 0.124
+            },
+            {
+                "start": 198.58904,
+                "duration": 2.08615,
+                "confidence": 0.417
+            },
+            {
+                "start": 200.67519,
+                "duration": 2.10169,
+                "confidence": 0.000
+            }
+        ],
+        "beats": [
+            {
+                "start": 0.49567,
+                "duration": 0.56431,
+                "confidence": 0.612
+            },
+            {
+                "start": 1.05998,
+                "duration": 0.54896,
+                "confidence": 0.325
+            },
+            {
+                "start": 1.60894,
+                "duration": 0.53701,
+                "confidence": 0.228
+            },
+            {
+                "start": 2.14594,
+                "duration": 0.53722,
+                "confidence": 0.643
+            },
+            {
+                "start": 2.68316,
+                "duration": 0.53331,
+                "confidence": 0.820
+            },
+            {
+                "start": 3.21647,
+                "duration": 0.52698,
+                "confidence": 0.640
+            },
+            {
+                "start": 3.74345,
+                "duration": 0.52260,
+                "confidence": 0.667
+            },
+            {
+                "start": 4.26605,
+                "duration": 0.52706,
+                "confidence": 0.782
+            },
+            {
+                "start": 4.79311,
+                "duration": 0.53004,
+                "confidence": 0.838
+            },
+            {
+                "start": 5.32316,
+                "duration": 0.54088,
+                "confidence": 0.639
+            },
+            {
+                "start": 5.86403,
+                "duration": 0.54778,
+                "confidence": 0.813
+            },
+            {
+                "start": 6.41182,
+                "duration": 0.55911,
+                "confidence": 0.759
+            },
+            {
+                "start": 6.97092,
+                "duration": 0.55767,
+                "confidence": 0.585
+            },
+            {
+                "start": 7.52860,
+                "duration": 0.55624,
+                "confidence": 0.645
+            },
+            {
+                "start": 8.08483,
+                "duration": 0.55283,
+                "confidence": 0.544
+            },
+            {
+                "start": 8.63766,
+                "duration": 0.55384,
+                "confidence": 0.634
+            },
+            {
+                "start": 9.19150,
+                "duration": 0.55779,
+                "confidence": 0.550
+            },
+            {
+                "start": 9.74930,
+                "duration": 0.55880,
+                "confidence": 0.641
+            },
+            {
+                "start": 10.30810,
+                "duration": 0.55884,
+                "confidence": 0.739
+            },
+            {
+                "start": 10.86693,
+                "duration": 0.55790,
+                "confidence": 0.471
+            },
+            {
+                "start": 11.42483,
+                "duration": 0.56677,
+                "confidence": 0.673
+            },
+            {
+                "start": 11.99160,
+                "duration": 0.56351,
+                "confidence": 0.473
+            },
+            {
+                "start": 12.55512,
+                "duration": 0.55830,
+                "confidence": 0.534
+            },
+            {
+                "start": 13.11341,
+                "duration": 0.55810,
+                "confidence": 0.633
+            },
+            {
+                "start": 13.67151,
+                "duration": 0.55691,
+                "confidence": 0.417
+            },
+            {
+                "start": 14.22842,
+                "duration": 0.55726,
+                "confidence": 0.311
+            },
+            {
+                "start": 14.78568,
+                "duration": 0.55909,
+                "confidence": 0.352
+            },
+            {
+                "start": 15.34477,
+                "duration": 0.55305,
+                "confidence": 0.486
+            },
+            {
+                "start": 15.89782,
+                "duration": 0.55130,
+                "confidence": 0.278
+            },
+            {
+                "start": 16.44912,
+                "duration": 0.55204,
+                "confidence": 0.671
+            },
+            {
+                "start": 17.00116,
+                "duration": 0.54185,
+                "confidence": 0.642
+            },
+            {
+                "start": 17.54301,
+                "duration": 0.53856,
+                "confidence": 0.184
+            },
+            {
+                "start": 18.08157,
+                "duration": 0.52485,
+                "confidence": 0.604
+            },
+            {
+                "start": 18.60642,
+                "duration": 0.51995,
+                "confidence": 0.736
+            },
+            {
+                "start": 19.12637,
+                "duration": 0.53281,
+                "confidence": 0.744
+            },
+            {
+                "start": 19.65918,
+                "duration": 0.54860,
+                "confidence": 0.540
+            },
+            {
+                "start": 20.20777,
+                "duration": 0.55748,
+                "confidence": 0.490
+            },
+            {
+                "start": 20.76525,
+                "duration": 0.56425,
+                "confidence": 0.523
+            },
+            {
+                "start": 21.32950,
+                "duration": 0.57299,
+                "confidence": 0.237
+            },
+            {
+                "start": 21.90249,
+                "duration": 0.57870,
+                "confidence": 0.407
+            },
+            {
+                "start": 22.48119,
+                "duration": 0.58047,
+                "confidence": 0.327
+            },
+            {
+                "start": 23.06166,
+                "duration": 0.56541,
+                "confidence": 0.215
+            },
+            {
+                "start": 23.62708,
+                "duration": 0.56019,
+                "confidence": 0.532
+            },
+            {
+                "start": 24.18726,
+                "duration": 0.55967,
+                "confidence": 0.503
+            },
+            {
+                "start": 24.74693,
+                "duration": 0.55195,
+                "confidence": 0.129
+            },
+            {
+                "start": 25.29888,
+                "duration": 0.53960,
+                "confidence": 0.644
+            },
+            {
+                "start": 25.83848,
+                "duration": 0.54041,
+                "confidence": 0.428
+            },
+            {
+                "start": 26.37889,
+                "duration": 0.53539,
+                "confidence": 0.678
+            },
+            {
+                "start": 26.91428,
+                "duration": 0.53956,
+                "confidence": 0.526
+            },
+            {
+                "start": 27.45383,
+                "duration": 0.53291,
+                "confidence": 0.532
+            },
+            {
+                "start": 27.98674,
+                "duration": 0.52616,
+                "confidence": 0.240
+            },
+            {
+                "start": 28.51290,
+                "duration": 0.52147,
+                "confidence": 0.379
+            },
+            {
+                "start": 29.03437,
+                "duration": 0.52165,
+                "confidence": 0.531
+            },
+            {
+                "start": 29.55603,
+                "duration": 0.51908,
+                "confidence": 0.631
+            },
+            {
+                "start": 30.07511,
+                "duration": 0.52417,
+                "confidence": 0.321
+            },
+            {
+                "start": 30.59928,
+                "duration": 0.52262,
+                "confidence": 0.096
+            },
+            {
+                "start": 31.12190,
+                "duration": 0.52325,
+                "confidence": 0.259
+            },
+            {
+                "start": 31.64515,
+                "duration": 0.51879,
+                "confidence": 0.225
+            },
+            {
+                "start": 32.16394,
+                "duration": 0.52185,
+                "confidence": 0.494
+            },
+            {
+                "start": 32.68579,
+                "duration": 0.52215,
+                "confidence": 0.315
+            },
+            {
+                "start": 33.20794,
+                "duration": 0.52110,
+                "confidence": 0.630
+            },
+            {
+                "start": 33.72904,
+                "duration": 0.52022,
+                "confidence": 0.718
+            },
+            {
+                "start": 34.24926,
+                "duration": 0.52142,
+                "confidence": 0.532
+            },
+            {
+                "start": 34.77068,
+                "duration": 0.51809,
+                "confidence": 0.335
+            },
+            {
+                "start": 35.28876,
+                "duration": 0.51914,
+                "confidence": 0.502
+            },
+            {
+                "start": 35.80790,
+                "duration": 0.52043,
+                "confidence": 0.326
+            },
+            {
+                "start": 36.32833,
+                "duration": 0.51879,
+                "confidence": 0.512
+            },
+            {
+                "start": 36.84712,
+                "duration": 0.51961,
+                "confidence": 0.369
+            },
+            {
+                "start": 37.36674,
+                "duration": 0.52092,
+                "confidence": 0.668
+            },
+            {
+                "start": 37.88766,
+                "duration": 0.52135,
+                "confidence": 0.255
+            },
+            {
+                "start": 38.40902,
+                "duration": 0.52407,
+                "confidence": 0.287
+            },
+            {
+                "start": 38.93309,
+                "duration": 0.52428,
+                "confidence": 0.466
+            },
+            {
+                "start": 39.45737,
+                "duration": 0.52165,
+                "confidence": 0.520
+            },
+            {
+                "start": 39.97902,
+                "duration": 0.52424,
+                "confidence": 0.662
+            },
+            {
+                "start": 40.50327,
+                "duration": 0.52183,
+                "confidence": 0.362
+            },
+            {
+                "start": 41.02509,
+                "duration": 0.52082,
+                "confidence": 0.254
+            },
+            {
+                "start": 41.54592,
+                "duration": 0.52233,
+                "confidence": 0.470
+            },
+            {
+                "start": 42.06825,
+                "duration": 0.52254,
+                "confidence": 0.442
+            },
+            {
+                "start": 42.59079,
+                "duration": 0.51993,
+                "confidence": 0.407
+            },
+            {
+                "start": 43.11072,
+                "duration": 0.52210,
+                "confidence": 0.572
+            },
+            {
+                "start": 43.63282,
+                "duration": 0.52185,
+                "confidence": 0.563
+            },
+            {
+                "start": 44.15467,
+                "duration": 0.52309,
+                "confidence": 0.648
+            },
+            {
+                "start": 44.67776,
+                "duration": 0.52147,
+                "confidence": 0.490
+            },
+            {
+                "start": 45.19923,
+                "duration": 0.52039,
+                "confidence": 0.388
+            },
+            {
+                "start": 45.71962,
+                "duration": 0.52158,
+                "confidence": 0.555
+            },
+            {
+                "start": 46.24120,
+                "duration": 0.52232,
+                "confidence": 0.398
+            },
+            {
+                "start": 46.76352,
+                "duration": 0.52398,
+                "confidence": 0.325
+            },
+            {
+                "start": 47.28750,
+                "duration": 0.52432,
+                "confidence": 0.485
+            },
+            {
+                "start": 47.81183,
+                "duration": 0.52181,
+                "confidence": 0.510
+            },
+            {
+                "start": 48.33364,
+                "duration": 0.52402,
+                "confidence": 0.493
+            },
+            {
+                "start": 48.85766,
+                "duration": 0.52149,
+                "confidence": 0.557
+            },
+            {
+                "start": 49.37915,
+                "duration": 0.52088,
+                "confidence": 0.584
+            },
+            {
+                "start": 49.90002,
+                "duration": 0.52113,
+                "confidence": 0.625
+            },
+            {
+                "start": 50.42115,
+                "duration": 0.51995,
+                "confidence": 0.357
+            },
+            {
+                "start": 50.94110,
+                "duration": 0.51970,
+                "confidence": 0.430
+            },
+            {
+                "start": 51.46081,
+                "duration": 0.51955,
+                "confidence": 0.498
+            },
+            {
+                "start": 51.98036,
+                "duration": 0.52080,
+                "confidence": 0.503
+            },
+            {
+                "start": 52.50116,
+                "duration": 0.52356,
+                "confidence": 0.568
+            },
+            {
+                "start": 53.02472,
+                "duration": 0.52168,
+                "confidence": 0.655
+            },
+            {
+                "start": 53.54640,
+                "duration": 0.52222,
+                "confidence": 0.605
+            },
+            {
+                "start": 54.06862,
+                "duration": 0.52327,
+                "confidence": 0.537
+            },
+            {
+                "start": 54.59189,
+                "duration": 0.52343,
+                "confidence": 0.385
+            },
+            {
+                "start": 55.11532,
+                "duration": 0.52542,
+                "confidence": 0.438
+            },
+            {
+                "start": 55.64074,
+                "duration": 0.52322,
+                "confidence": 0.557
+            },
+            {
+                "start": 56.16395,
+                "duration": 0.52096,
+                "confidence": 0.540
+            },
+            {
+                "start": 56.68492,
+                "duration": 0.52243,
+                "confidence": 0.528
+            },
+            {
+                "start": 57.20734,
+                "duration": 0.51968,
+                "confidence": 0.403
+            },
+            {
+                "start": 57.72703,
+                "duration": 0.51973,
+                "confidence": 0.337
+            },
+            {
+                "start": 58.24675,
+                "duration": 0.52019,
+                "confidence": 0.460
+            },
+            {
+                "start": 58.76694,
+                "duration": 0.52019,
+                "confidence": 0.440
+            },
+            {
+                "start": 59.28714,
+                "duration": 0.52019,
+                "confidence": 0.337
+            },
+            {
+                "start": 59.80733,
+                "duration": 0.52252,
+                "confidence": 0.494
+            },
+            {
+                "start": 60.32985,
+                "duration": 0.52066,
+                "confidence": 0.540
+            },
+            {
+                "start": 60.85051,
+                "duration": 0.52253,
+                "confidence": 0.576
+            },
+            {
+                "start": 61.37304,
+                "duration": 0.52114,
+                "confidence": 0.440
+            },
+            {
+                "start": 61.89418,
+                "duration": 0.52114,
+                "confidence": 0.381
+            },
+            {
+                "start": 62.41532,
+                "duration": 0.52068,
+                "confidence": 0.387
+            },
+            {
+                "start": 62.93600,
+                "duration": 0.52162,
+                "confidence": 0.328
+            },
+            {
+                "start": 63.45763,
+                "duration": 0.52024,
+                "confidence": 0.351
+            },
+            {
+                "start": 63.97786,
+                "duration": 0.52164,
+                "confidence": 0.540
+            },
+            {
+                "start": 64.49950,
+                "duration": 0.52211,
+                "confidence": 0.714
+            },
+            {
+                "start": 65.02161,
+                "duration": 0.52118,
+                "confidence": 0.750
+            },
+            {
+                "start": 65.54279,
+                "duration": 0.52025,
+                "confidence": 0.785
+            },
+            {
+                "start": 66.06304,
+                "duration": 0.52165,
+                "confidence": 0.787
+            },
+            {
+                "start": 66.58469,
+                "duration": 0.52257,
+                "confidence": 0.738
+            },
+            {
+                "start": 67.10726,
+                "duration": 0.52163,
+                "confidence": 0.699
+            },
+            {
+                "start": 67.62889,
+                "duration": 0.52209,
+                "confidence": 0.632
+            },
+            {
+                "start": 68.15099,
+                "duration": 0.52209,
+                "confidence": 0.688
+            },
+            {
+                "start": 68.67308,
+                "duration": 0.52582,
+                "confidence": 0.492
+            },
+            {
+                "start": 69.19889,
+                "duration": 0.51836,
+                "confidence": 0.421
+            },
+            {
+                "start": 69.71725,
+                "duration": 0.52442,
+                "confidence": 0.427
+            },
+            {
+                "start": 70.24167,
+                "duration": 0.52024,
+                "confidence": 0.618
+            },
+            {
+                "start": 70.76191,
+                "duration": 0.52072,
+                "confidence": 0.579
+            },
+            {
+                "start": 71.28263,
+                "duration": 0.52212,
+                "confidence": 0.613
+            },
+            {
+                "start": 71.80475,
+                "duration": 0.52306,
+                "confidence": 0.723
+            },
+            {
+                "start": 72.32781,
+                "duration": 0.52074,
+                "confidence": 0.779
+            },
+            {
+                "start": 72.84854,
+                "duration": 0.52820,
+                "confidence": 0.666
+            },
+            {
+                "start": 73.37674,
+                "duration": 0.52027,
+                "confidence": 0.662
+            },
+            {
+                "start": 73.89701,
+                "duration": 0.52585,
+                "confidence": 0.527
+            },
+            {
+                "start": 74.42285,
+                "duration": 0.52537,
+                "confidence": 0.717
+            },
+            {
+                "start": 74.94822,
+                "duration": 0.52396,
+                "confidence": 0.693
+            },
+            {
+                "start": 75.47218,
+                "duration": 0.52116,
+                "confidence": 0.615
+            },
+            {
+                "start": 75.99334,
+                "duration": 0.52162,
+                "confidence": 0.512
+            },
+            {
+                "start": 76.51496,
+                "duration": 0.52021,
+                "confidence": 0.696
+            },
+            {
+                "start": 77.03517,
+                "duration": 0.52161,
+                "confidence": 0.536
+            },
+            {
+                "start": 77.55678,
+                "duration": 0.52022,
+                "confidence": 0.616
+            },
+            {
+                "start": 78.07701,
+                "duration": 0.52163,
+                "confidence": 0.428
+            },
+            {
+                "start": 78.59864,
+                "duration": 0.51885,
+                "confidence": 0.586
+            },
+            {
+                "start": 79.11749,
+                "duration": 0.52118,
+                "confidence": 0.512
+            },
+            {
+                "start": 79.63866,
+                "duration": 0.52118,
+                "confidence": 0.452
+            },
+            {
+                "start": 80.15984,
+                "duration": 0.52397,
+                "confidence": 0.645
+            },
+            {
+                "start": 80.68382,
+                "duration": 0.52164,
+                "confidence": 0.752
+            },
+            {
+                "start": 81.20546,
+                "duration": 0.52024,
+                "confidence": 0.693
+            },
+            {
+                "start": 81.72570,
+                "duration": 0.51977,
+                "confidence": 0.615
+            },
+            {
+                "start": 82.24547,
+                "duration": 0.52302,
+                "confidence": 0.535
+            },
+            {
+                "start": 82.76849,
+                "duration": 0.52115,
+                "confidence": 0.724
+            },
+            {
+                "start": 83.28964,
+                "duration": 0.51881,
+                "confidence": 0.728
+            },
+            {
+                "start": 83.80845,
+                "duration": 0.52207,
+                "confidence": 0.638
+            },
+            {
+                "start": 84.33052,
+                "duration": 0.52160,
+                "confidence": 0.456
+            },
+            {
+                "start": 84.85212,
+                "duration": 0.52161,
+                "confidence": 0.584
+            },
+            {
+                "start": 85.37373,
+                "duration": 0.52068,
+                "confidence": 0.381
+            },
+            {
+                "start": 85.89441,
+                "duration": 0.52254,
+                "confidence": 0.355
+            },
+            {
+                "start": 86.41695,
+                "duration": 0.52255,
+                "confidence": 0.547
+            },
+            {
+                "start": 86.93950,
+                "duration": 0.52394,
+                "confidence": 0.715
+            },
+            {
+                "start": 87.46344,
+                "duration": 0.51928,
+                "confidence": 0.591
+            },
+            {
+                "start": 87.98273,
+                "duration": 0.52160,
+                "confidence": 0.459
+            },
+            {
+                "start": 88.50433,
+                "duration": 0.51926,
+                "confidence": 0.419
+            },
+            {
+                "start": 89.02359,
+                "duration": 0.52065,
+                "confidence": 0.578
+            },
+            {
+                "start": 89.54424,
+                "duration": 0.51970,
+                "confidence": 0.402
+            },
+            {
+                "start": 90.06395,
+                "duration": 0.52202,
+                "confidence": 0.374
+            },
+            {
+                "start": 90.58596,
+                "duration": 0.52387,
+                "confidence": 0.262
+            },
+            {
+                "start": 91.10983,
+                "duration": 0.52060,
+                "confidence": 0.417
+            },
+            {
+                "start": 91.63043,
+                "duration": 0.52246,
+                "confidence": 0.432
+            },
+            {
+                "start": 92.15290,
+                "duration": 0.52573,
+                "confidence": 0.410
+            },
+            {
+                "start": 92.67862,
+                "duration": 0.52480,
+                "confidence": 0.239
+            },
+            {
+                "start": 93.20342,
+                "duration": 0.52295,
+                "confidence": 0.363
+            },
+            {
+                "start": 93.72637,
+                "duration": 0.52155,
+                "confidence": 0.431
+            },
+            {
+                "start": 94.24792,
+                "duration": 0.52109,
+                "confidence": 0.532
+            },
+            {
+                "start": 94.76902,
+                "duration": 0.52155,
+                "confidence": 0.584
+            },
+            {
+                "start": 95.29057,
+                "duration": 0.52108,
+                "confidence": 0.636
+            },
+            {
+                "start": 95.81165,
+                "duration": 0.52105,
+                "confidence": 0.619
+            },
+            {
+                "start": 96.33269,
+                "duration": 0.52195,
+                "confidence": 0.464
+            },
+            {
+                "start": 96.85464,
+                "duration": 0.52052,
+                "confidence": 0.465
+            },
+            {
+                "start": 97.37515,
+                "duration": 0.52096,
+                "confidence": 0.498
+            },
+            {
+                "start": 97.89612,
+                "duration": 0.51954,
+                "confidence": 0.447
+            },
+            {
+                "start": 98.41566,
+                "duration": 0.52235,
+                "confidence": 0.482
+            },
+            {
+                "start": 98.93801,
+                "duration": 0.51957,
+                "confidence": 0.580
+            },
+            {
+                "start": 99.45758,
+                "duration": 0.52054,
+                "confidence": 0.647
+            },
+            {
+                "start": 99.97812,
+                "duration": 0.52153,
+                "confidence": 0.562
+            },
+            {
+                "start": 100.49965,
+                "duration": 0.52251,
+                "confidence": 0.346
+            },
+            {
+                "start": 101.02216,
+                "duration": 0.52163,
+                "confidence": 0.435
+            },
+            {
+                "start": 101.54379,
+                "duration": 0.52490,
+                "confidence": 0.541
+            },
+            {
+                "start": 102.06869,
+                "duration": 0.52164,
+                "confidence": 0.559
+            },
+            {
+                "start": 102.59033,
+                "duration": 0.52442,
+                "confidence": 0.577
+            },
+            {
+                "start": 103.11475,
+                "duration": 0.52065,
+                "confidence": 0.354
+            },
+            {
+                "start": 103.63540,
+                "duration": 0.51969,
+                "confidence": 0.275
+            },
+            {
+                "start": 104.15510,
+                "duration": 0.52245,
+                "confidence": 0.406
+            },
+            {
+                "start": 104.67755,
+                "duration": 0.52429,
+                "confidence": 0.409
+            },
+            {
+                "start": 105.20184,
+                "duration": 0.51823,
+                "confidence": 0.403
+            },
+            {
+                "start": 105.72007,
+                "duration": 0.52196,
+                "confidence": 0.547
+            },
+            {
+                "start": 106.24203,
+                "duration": 0.52011,
+                "confidence": 0.559
+            },
+            {
+                "start": 106.76214,
+                "duration": 0.52338,
+                "confidence": 0.597
+            },
+            {
+                "start": 107.28552,
+                "duration": 0.52199,
+                "confidence": 0.479
+            },
+            {
+                "start": 107.80752,
+                "duration": 0.52060,
+                "confidence": 0.404
+            },
+            {
+                "start": 108.32812,
+                "duration": 0.52012,
+                "confidence": 0.475
+            },
+            {
+                "start": 108.84824,
+                "duration": 0.52429,
+                "confidence": 0.416
+            },
+            {
+                "start": 109.37254,
+                "duration": 0.52427,
+                "confidence": 0.368
+            },
+            {
+                "start": 109.89681,
+                "duration": 0.52471,
+                "confidence": 0.515
+            },
+            {
+                "start": 110.42152,
+                "duration": 0.52189,
+                "confidence": 0.496
+            },
+            {
+                "start": 110.94340,
+                "duration": 0.52279,
+                "confidence": 0.486
+            },
+            {
+                "start": 111.46619,
+                "duration": 0.52042,
+                "confidence": 0.566
+            },
+            {
+                "start": 111.98661,
+                "duration": 0.52132,
+                "confidence": 0.570
+            },
+            {
+                "start": 112.50793,
+                "duration": 0.52083,
+                "confidence": 0.579
+            },
+            {
+                "start": 113.02876,
+                "duration": 0.51988,
+                "confidence": 0.413
+            },
+            {
+                "start": 113.54865,
+                "duration": 0.51985,
+                "confidence": 0.468
+            },
+            {
+                "start": 114.06849,
+                "duration": 0.52028,
+                "confidence": 0.517
+            },
+            {
+                "start": 114.58878,
+                "duration": 0.52115,
+                "confidence": 0.518
+            },
+            {
+                "start": 115.10993,
+                "duration": 0.52390,
+                "confidence": 0.581
+            },
+            {
+                "start": 115.63383,
+                "duration": 0.52150,
+                "confidence": 0.668
+            },
+            {
+                "start": 116.15533,
+                "duration": 0.52142,
+                "confidence": 0.612
+            },
+            {
+                "start": 116.67675,
+                "duration": 0.52271,
+                "confidence": 0.556
+            },
+            {
+                "start": 117.19946,
+                "duration": 0.52449,
+                "confidence": 0.389
+            },
+            {
+                "start": 117.72395,
+                "duration": 0.52485,
+                "confidence": 0.441
+            },
+            {
+                "start": 118.24879,
+                "duration": 0.52291,
+                "confidence": 0.556
+            },
+            {
+                "start": 118.77170,
+                "duration": 0.52096,
+                "confidence": 0.544
+            },
+            {
+                "start": 119.29266,
+                "duration": 0.52275,
+                "confidence": 0.523
+            },
+            {
+                "start": 119.81542,
+                "duration": 0.52083,
+                "confidence": 0.385
+            },
+            {
+                "start": 120.33625,
+                "duration": 0.51986,
+                "confidence": 0.349
+            },
+            {
+                "start": 120.85611,
+                "duration": 0.52075,
+                "confidence": 0.490
+            },
+            {
+                "start": 121.37686,
+                "duration": 0.52120,
+                "confidence": 0.461
+            },
+            {
+                "start": 121.89806,
+                "duration": 0.52118,
+                "confidence": 0.365
+            },
+            {
+                "start": 122.41924,
+                "duration": 0.52303,
+                "confidence": 0.503
+            },
+            {
+                "start": 122.94228,
+                "duration": 0.52117,
+                "confidence": 0.519
+            },
+            {
+                "start": 123.46345,
+                "duration": 0.52256,
+                "confidence": 0.560
+            },
+            {
+                "start": 123.98601,
+                "duration": 0.52302,
+                "confidence": 0.433
+            },
+            {
+                "start": 124.50902,
+                "duration": 0.51976,
+                "confidence": 0.331
+            },
+            {
+                "start": 125.02879,
+                "duration": 0.51883,
+                "confidence": 0.310
+            },
+            {
+                "start": 125.54762,
+                "duration": 0.52069,
+                "confidence": 0.227
+            },
+            {
+                "start": 126.06830,
+                "duration": 0.51929,
+                "confidence": 0.336
+            },
+            {
+                "start": 126.58759,
+                "duration": 0.52068,
+                "confidence": 0.525
+            },
+            {
+                "start": 127.10827,
+                "duration": 0.52207,
+                "confidence": 0.712
+            },
+            {
+                "start": 127.63034,
+                "duration": 0.52067,
+                "confidence": 0.686
+            },
+            {
+                "start": 128.15101,
+                "duration": 0.51974,
+                "confidence": 0.774
+            },
+            {
+                "start": 128.67075,
+                "duration": 0.52206,
+                "confidence": 0.730
+            },
+            {
+                "start": 129.19281,
+                "duration": 0.52020,
+                "confidence": 0.792
+            },
+            {
+                "start": 129.71301,
+                "duration": 0.52158,
+                "confidence": 0.718
+            },
+            {
+                "start": 130.23459,
+                "duration": 0.52111,
+                "confidence": 0.601
+            },
+            {
+                "start": 130.75570,
+                "duration": 0.52157,
+                "confidence": 0.528
+            },
+            {
+                "start": 131.27727,
+                "duration": 0.52111,
+                "confidence": 0.462
+            },
+            {
+                "start": 131.79838,
+                "duration": 0.52343,
+                "confidence": 0.571
+            },
+            {
+                "start": 132.32181,
+                "duration": 0.52250,
+                "confidence": 0.592
+            },
+            {
+                "start": 132.84430,
+                "duration": 0.52482,
+                "confidence": 0.687
+            },
+            {
+                "start": 133.36912,
+                "duration": 0.52296,
+                "confidence": 0.661
+            },
+            {
+                "start": 133.89208,
+                "duration": 0.52203,
+                "confidence": 0.566
+            },
+            {
+                "start": 134.41412,
+                "duration": 0.52110,
+                "confidence": 0.573
+            },
+            {
+                "start": 134.93521,
+                "duration": 0.52249,
+                "confidence": 0.480
+            },
+            {
+                "start": 135.45770,
+                "duration": 0.52248,
+                "confidence": 0.540
+            },
+            {
+                "start": 135.98018,
+                "duration": 0.52248,
+                "confidence": 0.660
+            },
+            {
+                "start": 136.50266,
+                "duration": 0.51969,
+                "confidence": 0.691
+            },
+            {
+                "start": 137.02234,
+                "duration": 0.52247,
+                "confidence": 0.790
+            },
+            {
+                "start": 137.54481,
+                "duration": 0.52199,
+                "confidence": 0.716
+            },
+            {
+                "start": 138.06680,
+                "duration": 0.52153,
+                "confidence": 0.605
+            },
+            {
+                "start": 138.58833,
+                "duration": 0.52152,
+                "confidence": 0.570
+            },
+            {
+                "start": 139.10986,
+                "duration": 0.52106,
+                "confidence": 0.584
+            },
+            {
+                "start": 139.63091,
+                "duration": 0.51966,
+                "confidence": 0.504
+            },
+            {
+                "start": 140.15058,
+                "duration": 0.52198,
+                "confidence": 0.613
+            },
+            {
+                "start": 140.67256,
+                "duration": 0.52059,
+                "confidence": 0.628
+            },
+            {
+                "start": 141.19315,
+                "duration": 0.52244,
+                "confidence": 0.680
+            },
+            {
+                "start": 141.71559,
+                "duration": 0.52337,
+                "confidence": 0.481
+            },
+            {
+                "start": 142.23896,
+                "duration": 0.52105,
+                "confidence": 0.371
+            },
+            {
+                "start": 142.76001,
+                "duration": 0.52151,
+                "confidence": 0.458
+            },
+            {
+                "start": 143.28152,
+                "duration": 0.52290,
+                "confidence": 0.511
+            },
+            {
+                "start": 143.80442,
+                "duration": 0.52243,
+                "confidence": 0.591
+            },
+            {
+                "start": 144.32686,
+                "duration": 0.52336,
+                "confidence": 0.694
+            },
+            {
+                "start": 144.85022,
+                "duration": 0.52243,
+                "confidence": 0.711
+            },
+            {
+                "start": 145.37265,
+                "duration": 0.51965,
+                "confidence": 0.773
+            },
+            {
+                "start": 145.89229,
+                "duration": 0.52150,
+                "confidence": 0.688
+            },
+            {
+                "start": 146.41380,
+                "duration": 0.52336,
+                "confidence": 0.576
+            },
+            {
+                "start": 146.93716,
+                "duration": 0.52383,
+                "confidence": 0.491
+            },
+            {
+                "start": 147.46099,
+                "duration": 0.52290,
+                "confidence": 0.492
+            },
+            {
+                "start": 147.98390,
+                "duration": 0.51687,
+                "confidence": 0.574
+            },
+            {
+                "start": 148.50077,
+                "duration": 0.52105,
+                "confidence": 0.528
+            },
+            {
+                "start": 149.02182,
+                "duration": 0.52477,
+                "confidence": 0.532
+            },
+            {
+                "start": 149.54659,
+                "duration": 0.52291,
+                "confidence": 0.375
+            },
+            {
+                "start": 150.06950,
+                "duration": 0.52153,
+                "confidence": 0.243
+            },
+            {
+                "start": 150.59103,
+                "duration": 0.52154,
+                "confidence": 0.187
+            },
+            {
+                "start": 151.11256,
+                "duration": 0.52108,
+                "confidence": 0.177
+            },
+            {
+                "start": 151.63364,
+                "duration": 0.52619,
+                "confidence": 0.313
+            },
+            {
+                "start": 152.15983,
+                "duration": 0.52202,
+                "confidence": 0.391
+            },
+            {
+                "start": 152.68186,
+                "duration": 0.52063,
+                "confidence": 0.498
+            },
+            {
+                "start": 153.20249,
+                "duration": 0.52062,
+                "confidence": 0.537
+            },
+            {
+                "start": 153.72311,
+                "duration": 0.51922,
+                "confidence": 0.620
+            },
+            {
+                "start": 154.24234,
+                "duration": 0.52015,
+                "confidence": 0.587
+            },
+            {
+                "start": 154.76248,
+                "duration": 0.52200,
+                "confidence": 0.468
+            },
+            {
+                "start": 155.28448,
+                "duration": 0.52060,
+                "confidence": 0.476
+            },
+            {
+                "start": 155.80508,
+                "duration": 0.52013,
+                "confidence": 0.511
+            },
+            {
+                "start": 156.32521,
+                "duration": 0.52060,
+                "confidence": 0.461
+            },
+            {
+                "start": 156.84582,
+                "duration": 0.52246,
+                "confidence": 0.454
+            },
+            {
+                "start": 157.36828,
+                "duration": 0.52155,
+                "confidence": 0.532
+            },
+            {
+                "start": 157.88983,
+                "duration": 0.52157,
+                "confidence": 0.607
+            },
+            {
+                "start": 158.41139,
+                "duration": 0.52205,
+                "confidence": 0.545
+            },
+            {
+                "start": 158.93345,
+                "duration": 0.52254,
+                "confidence": 0.307
+            },
+            {
+                "start": 159.45598,
+                "duration": 0.52304,
+                "confidence": 0.391
+            },
+            {
+                "start": 159.97902,
+                "duration": 0.52447,
+                "confidence": 0.511
+            },
+            {
+                "start": 160.50349,
+                "duration": 0.52080,
+                "confidence": 0.547
+            },
+            {
+                "start": 161.02428,
+                "duration": 0.52315,
+                "confidence": 0.576
+            },
+            {
+                "start": 161.54743,
+                "duration": 0.51948,
+                "confidence": 0.336
+            },
+            {
+                "start": 162.06691,
+                "duration": 0.51905,
+                "confidence": 0.177
+            },
+            {
+                "start": 162.58596,
+                "duration": 0.52282,
+                "confidence": 0.273
+            },
+            {
+                "start": 163.10879,
+                "duration": 0.52425,
+                "confidence": 0.269
+            },
+            {
+                "start": 163.63304,
+                "duration": 0.51872,
+                "confidence": 0.390
+            },
+            {
+                "start": 164.15176,
+                "duration": 0.52295,
+                "confidence": 0.525
+            },
+            {
+                "start": 164.67471,
+                "duration": 0.52300,
+                "confidence": 0.453
+            },
+            {
+                "start": 165.19771,
+                "duration": 0.52352,
+                "confidence": 0.543
+            },
+            {
+                "start": 165.72123,
+                "duration": 0.52310,
+                "confidence": 0.464
+            },
+            {
+                "start": 166.24433,
+                "duration": 0.52081,
+                "confidence": 0.375
+            },
+            {
+                "start": 166.76515,
+                "duration": 0.51899,
+                "confidence": 0.457
+            },
+            {
+                "start": 167.28414,
+                "duration": 0.52134,
+                "confidence": 0.431
+            },
+            {
+                "start": 167.80548,
+                "duration": 0.52415,
+                "confidence": 0.364
+            },
+            {
+                "start": 168.32963,
+                "duration": 0.52276,
+                "confidence": 0.429
+            },
+            {
+                "start": 168.85239,
+                "duration": 0.52230,
+                "confidence": 0.442
+            },
+            {
+                "start": 169.37469,
+                "duration": 0.52324,
+                "confidence": 0.445
+            },
+            {
+                "start": 169.89792,
+                "duration": 0.52045,
+                "confidence": 0.546
+            },
+            {
+                "start": 170.41837,
+                "duration": 0.52047,
+                "confidence": 0.533
+            },
+            {
+                "start": 170.93884,
+                "duration": 0.52281,
+                "confidence": 0.496
+            },
+            {
+                "start": 171.46165,
+                "duration": 0.52052,
+                "confidence": 0.291
+            },
+            {
+                "start": 171.98217,
+                "duration": 0.51961,
+                "confidence": 0.303
+            },
+            {
+                "start": 172.50178,
+                "duration": 0.51918,
+                "confidence": 0.317
+            },
+            {
+                "start": 173.02096,
+                "duration": 0.52013,
+                "confidence": 0.341
+            },
+            {
+                "start": 173.54109,
+                "duration": 0.52389,
+                "confidence": 0.474
+            },
+            {
+                "start": 174.06498,
+                "duration": 0.52299,
+                "confidence": 0.518
+            },
+            {
+                "start": 174.58797,
+                "duration": 0.52209,
+                "confidence": 0.463
+            },
+            {
+                "start": 175.11006,
+                "duration": 0.52211,
+                "confidence": 0.290
+            },
+            {
+                "start": 175.63217,
+                "duration": 0.52306,
+                "confidence": 0.278
+            },
+            {
+                "start": 176.15523,
+                "duration": 0.52633,
+                "confidence": 0.227
+            },
+            {
+                "start": 176.68156,
+                "duration": 0.52450,
+                "confidence": 0.391
+            },
+            {
+                "start": 177.20606,
+                "duration": 0.52034,
+                "confidence": 0.479
+            },
+            {
+                "start": 177.72640,
+                "duration": 0.52130,
+                "confidence": 0.514
+            },
+            {
+                "start": 178.24770,
+                "duration": 0.51854,
+                "confidence": 0.379
+            },
+            {
+                "start": 178.76624,
+                "duration": 0.51857,
+                "confidence": 0.314
+            },
+            {
+                "start": 179.28481,
+                "duration": 0.51954,
+                "confidence": 0.420
+            },
+            {
+                "start": 179.80436,
+                "duration": 0.52005,
+                "confidence": 0.346
+            },
+            {
+                "start": 180.32441,
+                "duration": 0.51961,
+                "confidence": 0.281
+            },
+            {
+                "start": 180.84402,
+                "duration": 0.52335,
+                "confidence": 0.420
+            },
+            {
+                "start": 181.36737,
+                "duration": 0.52336,
+                "confidence": 0.431
+            },
+            {
+                "start": 181.89073,
+                "duration": 0.52477,
+                "confidence": 0.560
+            },
+            {
+                "start": 182.41550,
+                "duration": 0.52431,
+                "confidence": 0.447
+            },
+            {
+                "start": 182.93981,
+                "duration": 0.52151,
+                "confidence": 0.375
+            },
+            {
+                "start": 183.46132,
+                "duration": 0.52105,
+                "confidence": 0.410
+            },
+            {
+                "start": 183.98237,
+                "duration": 0.52338,
+                "confidence": 0.367
+            },
+            {
+                "start": 184.50575,
+                "duration": 0.52012,
+                "confidence": 0.378
+            },
+            {
+                "start": 185.02586,
+                "duration": 0.51825,
+                "confidence": 0.494
+            },
+            {
+                "start": 185.54412,
+                "duration": 0.52010,
+                "confidence": 0.504
+            },
+            {
+                "start": 186.06422,
+                "duration": 0.52288,
+                "confidence": 0.417
+            },
+            {
+                "start": 186.58710,
+                "duration": 0.52239,
+                "confidence": 0.366
+            },
+            {
+                "start": 187.10948,
+                "duration": 0.52190,
+                "confidence": 0.304
+            },
+            {
+                "start": 187.63138,
+                "duration": 0.52140,
+                "confidence": 0.285
+            },
+            {
+                "start": 188.15278,
+                "duration": 0.52136,
+                "confidence": 0.383
+            },
+            {
+                "start": 188.67414,
+                "duration": 0.52318,
+                "confidence": 0.342
+            },
+            {
+                "start": 189.19732,
+                "duration": 0.52268,
+                "confidence": 0.288
+            },
+            {
+                "start": 189.72000,
+                "duration": 0.52125,
+                "confidence": 0.386
+            },
+            {
+                "start": 190.24125,
+                "duration": 0.52309,
+                "confidence": 0.384
+            },
+            {
+                "start": 190.76433,
+                "duration": 0.52074,
+                "confidence": 0.389
+            },
+            {
+                "start": 191.28507,
+                "duration": 0.51840,
+                "confidence": 0.427
+            },
+            {
+                "start": 191.80347,
+                "duration": 0.52398,
+                "confidence": 0.445
+            },
+            {
+                "start": 192.32745,
+                "duration": 0.52445,
+                "confidence": 0.341
+            },
+            {
+                "start": 192.85190,
+                "duration": 0.52167,
+                "confidence": 0.288
+            },
+            {
+                "start": 193.37357,
+                "duration": 0.52260,
+                "confidence": 0.272
+            },
+            {
+                "start": 193.89617,
+                "duration": 0.52215,
+                "confidence": 0.392
+            },
+            {
+                "start": 194.41832,
+                "duration": 0.52215,
+                "confidence": 0.486
+            },
+            {
+                "start": 194.94048,
+                "duration": 0.52076,
+                "confidence": 0.331
+            },
+            {
+                "start": 195.46124,
+                "duration": 0.51937,
+                "confidence": 0.186
+            },
+            {
+                "start": 195.98061,
+                "duration": 0.52169,
+                "confidence": 0.261
+            },
+            {
+                "start": 196.50230,
+                "duration": 0.52355,
+                "confidence": 0.395
+            },
+            {
+                "start": 197.02585,
+                "duration": 0.51983,
+                "confidence": 0.402
+            },
+            {
+                "start": 197.54568,
+                "duration": 0.52215,
+                "confidence": 0.400
+            },
+            {
+                "start": 198.06783,
+                "duration": 0.52121,
+                "confidence": 0.487
+            },
+            {
+                "start": 198.58904,
+                "duration": 0.52586,
+                "confidence": 0.532
+            },
+            {
+                "start": 199.11490,
+                "duration": 0.51887,
+                "confidence": 0.376
+            },
+            {
+                "start": 199.63377,
+                "duration": 0.51979,
+                "confidence": 0.279
+            },
+            {
+                "start": 200.15356,
+                "duration": 0.52163,
+                "confidence": 0.341
+            },
+            {
+                "start": 200.67519,
+                "duration": 0.52347,
+                "confidence": 0.351
+            },
+            {
+                "start": 201.19866,
+                "duration": 0.52198,
+                "confidence": 0.200
+            },
+            {
+                "start": 201.72064,
+                "duration": 0.52695,
+                "confidence": 0.081
+            },
+            {
+                "start": 202.24759,
+                "duration": 0.52929,
+                "confidence": 0.046
+            },
+            {
+                "start": 202.77688,
+                "duration": 0.52929,
+                "confidence": 0.053
+            }
+        ],
+        "sections": [
+            {
+                "start": 0.00000,
+                "duration": 6.97092,
+                "confidence": 1.000,
+                "loudness": -14.938,
+                "tempo": 113.178,
+                "tempo_confidence": 0.647,
+                "key": 9,
+                "key_confidence": 0.297,
+                "mode": 1,
+                "mode_confidence": 0.471,
+                "time_signature": 4,
+                "time_signature_confidence": 1.000
+            },
+            {
+                "start": 6.97092,
+                "duration": 23.10418,
+                "confidence": 0.829,
+                "loudness": -7.771,
+                "tempo": 109.173,
+                "tempo_confidence": 0.501,
+                "key": 9,
+                "key_confidence": 0.162,
+                "mode": 0,
+                "mode_confidence": 0.319,
+                "time_signature": 4,
+                "time_signature_confidence": 1.000
+            },
+            {
+                "start": 30.07511,
+                "duration": 34.42440,
+                "confidence": 0.743,
+                "loudness": -1.593,
+                "tempo": 115.020,
+                "tempo_confidence": 0.458,
+                "key": 9,
+                "key_confidence": 0.000,
+                "mode": 1,
+                "mode_confidence": 0.214,
+                "time_signature": 4,
+                "time_signature_confidence": 0.969
+            },
+            {
+                "start": 64.49950,
+                "duration": 28.70392,
+                "confidence": 0.860,
+                "loudness": -6.108,
+                "tempo": 115.066,
+                "tempo_confidence": 0.575,
+                "key": 11,
+                "key_confidence": 0.540,
+                "mode": 0,
+                "mode_confidence": 0.486,
+                "time_signature": 4,
+                "time_signature_confidence": 1.000
+            },
+            {
+                "start": 93.20342,
+                "duration": 35.98939,
+                "confidence": 0.730,
+                "loudness": -1.492,
+                "tempo": 115.081,
+                "tempo_confidence": 0.495,
+                "key": 9,
+                "key_confidence": 0.000,
+                "mode": 1,
+                "mode_confidence": 0.026,
+                "time_signature": 4,
+                "time_signature_confidence": 1.000
+            },
+            {
+                "start": 129.19281,
+                "duration": 20.87669,
+                "confidence": 0.614,
+                "loudness": -3.597,
+                "tempo": 114.954,
+                "tempo_confidence": 0.591,
+                "key": 11,
+                "key_confidence": 0.398,
+                "mode": 0,
+                "mode_confidence": 0.383,
+                "time_signature": 4,
+                "time_signature_confidence": 1.000
+            },
+            {
+                "start": 150.06950,
+                "duration": 57.89036,
+                "confidence": 0.701,
+                "loudness": -1.024,
+                "tempo": 114.986,
+                "tempo_confidence": 0.390,
+                "key": 2,
+                "key_confidence": 0.043,
+                "mode": 1,
+                "mode_confidence": 0.382,
+                "time_signature": 4,
+                "time_signature_confidence": 1.000
+            }
+        ]
+    }
+});
