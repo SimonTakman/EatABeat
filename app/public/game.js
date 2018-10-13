@@ -15,6 +15,7 @@ class Game {
         this.obstacles = [];
         this.score = 0;
         this.hits = 0;
+        this.passedBeats = 0;
         this.lastCollision = null;
         this.status = {
             beatIndex: 0,
@@ -94,8 +95,10 @@ class Game {
             // Delta is the built in frame-independent transformation
             o.y += 1 * delta  * this.speed;
             if (o.y > this.app.renderer.height) {
+                this.passedBeats += 1;
                 this.app.stage.removeChild(o);
                 this.obstacles.splice(index, 1);
+                this.updateScore();
 
                 if (this.obstacles.length == 0 && this.status.barIndex == bars.length - 1) {
                     // Game ended
@@ -120,9 +123,8 @@ class Game {
         if (newBarIndex != this.status.barIndex) {
             this.status.barIndex = newBarIndex;
             var factor = beats[newBarIndex].confidence;
-            var width = factor * (this.windowWidth / 2);
-            var height = factor * 100 + 25;
-            this.addObstacle(width, height, Math.random());
+            var radius = factor * (this.windowWidth / 5);
+            this.addObstacle(radius, Math.random());
         }
     }
 
@@ -283,18 +285,18 @@ class Game {
         this.elements.exit = exitText;
     }
 
-    addObstacle(width, height, xPosition) {
-        var xLimit = this.app.renderer.width - width;
+    addObstacle(radius, xPosition) {
+        var xLimit = this.app.renderer.width;
         var graphics = new PIXI.Graphics();
         graphics.beginFill(this.color.complement, 1);
-        graphics.drawRect(xLimit * xPosition, 0, width, height);
+        graphics.drawCircle(xLimit * xPosition, 0, radius);
 
         this.app.stage.addChild(graphics);
         this.obstacles.push(graphics);
     }
 
     updateScore() {
-        this.elements.score.setText('SCORE ' + this.score + "\nHITS " + this.hits);
+        this.elements.score.setText("SCORE " + this.hits + "/" + this.passedBeats);
     }
 
     isPlayerColliding() {
@@ -318,6 +320,7 @@ class Game {
         let index = this.isPlayerColliding();
         if (index >= 0) {
             this.hits += 1;
+            this.passedBeats += 1;
             this.updateScore()
             this.app.stage.removeChild(this.obstacles[index]);
             this.obstacles.splice(index, 1);
