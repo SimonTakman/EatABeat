@@ -75,28 +75,25 @@ app.get('/search', function (request, response) {
 });
 
 app.get('/trackInfo', function (request, response) {
-  var trackInfo = {featuresBody: {}, analysisBody: {}};
+  var trackInfo = {features: {}, analysis: {}};
   var loggedInSpotifyApi = new SpotifyWebApi();
   loggedInSpotifyApi.setAccessToken(request.headers['authorization'].split(' ')[1]);
   /* Get Audio Features for a Track */
-  loggedInSpotifyApi.getAudioFeaturesForTrack(request.trackURI)
+  loggedInSpotifyApi.getAudioFeaturesForTrack(request.query.track_id)
     .then(function(data) {
-      trackInfo.featuresBody = data.body;
-      //console.log(data.body);
+      trackInfo.features = data.body;
+      /* Get Audio Analysis for a Track */
+      loggedInSpotifyApi.getAudioAnalysisForTrack(request.query.track_id)
+        .then(function(data) {
+          trackInfo.analysis = data.body;
+          response.send(trackInfo)
+          //console.log(data.body);
+        }, function(err) {
+          console.log(err);
+        });
     }, function(err) {
       console.log(err);
     });
-
-  /* Get Audio Analysis for a Track */
-  loggedInSpotifyApi.getAudioAnalysisForTrack(request.trackURI)
-    .then(function(data) {
-      trackInfo.analysisBody = data.body;
-      //console.log(data.body);
-    }, function(err) {
-      console.log(err);
-    });
-
-    response.send(trackInfo);
 });
 
 app.get('/me', function(request, response) {

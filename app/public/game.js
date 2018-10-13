@@ -122,7 +122,7 @@ class Game {
 
     setTrack(track) {
         this.track = track;
-        this.track.analysis.bars = [this.track.analysis.bars[0], this.track.analysis.bars[1]];
+        //this.track.analysis.bars = [this.track.analysis.bars[0], this.track.analysis.bars[1]];
     }
 
     setColor() {
@@ -220,9 +220,19 @@ class Game {
     }
 }
 var gameViewElement = document.getElementById('game-view');
-let track = JSON.parse(mock);
-let game = new Game(gameViewElement, track);
+let track = Cookies.get("track_id");
+console.log("track")
+let game;
+let accessToken = Cookies.get("access_token")
+if(track && accessToken){
+  initPlayback();
+  $.get({url: '/trackInfo', headers:{"Authorization": `Bearer ${accessToken}`}, data: {track_id: track}}, function(data){
+    console.log("Hae")    
+    console.log(data)
+    game = new Game(gameViewElement, data);
+    game.resize();
+  }) 
+}
 
 // Listen for window resize events
 window.addEventListener('resize', () => game.resize());
-game.resize();
