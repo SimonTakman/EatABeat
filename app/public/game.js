@@ -52,8 +52,7 @@ class Game {
     }
 
     onGameEnd() {
-        let possibleHits = this.track.analysis.bars.length;
-        this.score += (possibleHits - this.hits) / this.track.analysis.bars.length * 100;
+        this.score += this.hits / this.track.analysis.beats.length * 100;
         this.hits = 0;
         this.updateScore();
 
@@ -232,12 +231,12 @@ class Game {
     }
 
     addOuch() {
-        let ouchText = new PIXI.Text("OUCH!",
+        let ouchText = new PIXI.Text("YUM!",
             {
                 fontFamily : 'Courier New',
                 fontSize: 30,
                 fontWeight: 'bold',
-                fill: 0xFF0000
+                fill: 0x00FF00
             }
         );
         ouchText.visible = false;
@@ -323,9 +322,9 @@ class Game {
             this.app.stage.removeChild(this.obstacles[index]);
             this.obstacles.splice(index, 1);
             this.elements.player.y = this.app.renderer.height - this.playerRadius * 3
-            this.elements.player.rotation -= 0.4
-            this.elements.player.tint = 0xFF0000;
-            this.elements.score.style.fill = 0xFF0000;
+            this.elements.player.rotation -= 0.3
+            this.elements.player.tint = 0x00FF00;
+            this.elements.score.style.fill = 0x00FF00;
             this.elements.ouch.visible = true;
         } else if(this.elements.ouch.visible && !this.isDamaging) {
             setTimeout(() => {
@@ -334,7 +333,7 @@ class Game {
                 this.elements.score.style.fill = this.color.complement;
                 this.elements.player.tint = this.color.complement;
                 this.elements.ouch.visible = false;
-            }, 200)
+            }, 100)
         }
     }
 
