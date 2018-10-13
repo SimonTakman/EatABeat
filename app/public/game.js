@@ -249,10 +249,13 @@ class Game {
     }
 
     addTitle() {
-        let titleText = new PIXI.Text(this.track.track.artists[0].name + " - " + this.track.track.name,
+        let name = this.track.track.artists[0].name + " - " + this.track.track.name;
+        if (name.length > 24)
+            name = name.substring(0, 21) + '...';
+        let titleText = new PIXI.Text(name,
             {
                 fontFamily : 'Courier New',
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: 'bold',
                 fill: this.color.complement
             }
