@@ -1,76 +1,228 @@
-var height = document.body.height;
-var width = document.body.width;
+const COLORS = [
+    { main: 0xCEF564, complement: 0x1E3264 },
+    { main: 0xF573A1, complement: 0xC3F0C9 },
+    { main: 0xFFC864, complement: 0x9FC3D1 },
+    { main: 0xFFCCD3, complement: 0x9FC3D1 }
+];
 
-var app = new PIXI.Application({backgroundColor : 0x1099bb, autoResize: true });
-var gameViewElement = document.getElementById('game-view');
-gameViewElement.appendChild(app.view);
+class Game {
+    constructor(container, track) {
+        this.setTrack(track);
+        this.setColor();
+        this.elements = {};
+        this.obstacles = [];
+        this.score = 0;
+        this.hits = 0;
+        this.lastCollision = null;
+        this.status = {
+            beatIndex: 0,
+            barIndex: -1
+        };
+        this.startTime = (new Date()).getTime();
+        this.playerRadius = 18;
 
-let obstacles = [];
-
-let data = JSON.parse(mock);
-let beats = data.analysis.beats;
-console.log(beats);
-
-function addObstacle(width, height, xPosition) {
-    var xLimit = app.renderer.width - width;
-    var graphics = new PIXI.Graphics();
-    graphics.beginFill(0xFF700B, 1);
-    graphics.drawRect(xLimit * xPosition, 0, width, height);
-
-    app.stage.addChild(graphics);
-    obstacles.push(graphics);
-}
-
-var d = new Date();
-var startTime = d.getTime();
-function getDuration() {
-    return ((new Date()).getTime() - startTime) / 1000;
-}
-
-let lastBeat = -1;
-// Listen for animate update
-app.ticker.add(function(delta) {
-    // just for fun, let's rotate mr rabbit a little
-    // delta is 1 if running at 100% performance
-    // creates frame-independent transformation
-    // bunny.rotation += 0.1 * delta;
-
-    /* Update positions */
-    obstacles.forEach((o, index) => {
-        o.y += 1;
-        if (o.y > app.renderer.height) {
-            app.stage.removeChild(o);
-            obstacles.splice(index, 1);
+        // Clear container
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
         }
-    });
 
-    /* Spawn new things */
-    var duration = getDuration();
-    var newBeat = lastBeat;
-    for (var i = lastBeat + 1; i < beats.length; i++) {
-        if (beats[i].start < duration)
-            newBeat = i;
-        else
-            break;
+        // Create App
+        this.app = new PIXI.Application({backgroundColor : this.color.main, autoResize: true });
+        container.appendChild(this.app.view);
+        this.addPlayer();
+        this.addScore();
+        this.app.ticker.add((delta) => this.onTickEvent(delta));
+
+        // Mouse move to move player
+        let cb = (e) => {
+            this.elements.player.position.x = e.clientX;
+            this.updatePlayerCollision();
+        };
+        container.addEventListener('mousemove', cb);
+        container.addEventListener('touchmove', cb);
     }
 
-    if (newBeat != lastBeat) {
-        lastBeat = newBeat;
-        addObstacle(100, 50, Math.random());
+    onGameEnd() {
+        let possibleHits = this.track.analysis.bars.length;
+        this.score += (possibleHits - this.hits) / this.track.analysis.bars.length * 100;
+        this.hits = 0;
+        this.updateScore();
+
+        // TODO: Temp, start over
+        this.reset();
     }
-    else if (lastBeat == beats.length - 1) {
-        console.log("Done with beats");
+
+    reset() {
+        this.startTime = (new Date()).getTime();
+        this.status.beatIndex = 0;
+        this.status.barIndex = -1;
+
+        this.setColor();
+        this.app.renderer.backgroundColor = this.color.main;
+        this.refreshPlayer();
+        this.app.stage.removeChild(this.elements.score);
+        this.addScore();
     }
-});
+
+    getDuration() {
+        // TODO: Actual duration of song
+        return ((new Date()).getTime() - this.startTime) / 1000;
+    }
+
+    onTickEvent(delta) {
+        let beats = this.track.analysis.beats;
+        let bars = this.track.analysis.bars;
+        var duration = this.getDuration();
+
+        /* Update positions */
+        // Use beats for speed factor
+        for (var i = this.status.beatIndex; i < beats.length; i++) {
+            if (beats[i].start < duration)
+                this.status.beatIndex = i;
+            else
+                break;
+        }
+        let speed = (1 / beats[this.status.beatIndex].duration) ** 2;
+
+        // Update obstacles
+        this.obstacles.forEach((o, index) => {
+            // Delta is the built in frame-independent transformation
+            o.y += 1 * delta  * speed;
+            if (o.y > this.app.renderer.height) {
+                this.app.stage.removeChild(o);
+                this.obstacles.splice(index, 1);
+
+                if (this.obstacles.length == 0 && this.status.barIndex == bars.length - 1) {
+                    // Game ended
+                    console.log("End of game");
+                    this.onGameEnd();
+                }
+            }
+        });
+        
+        /* Update model */
+        this.updatePlayerCollision();
+
+        var newBarIndex = this.status.barIndex;
+        for (var i = this.status.barIndex + 1; i < bars.length; i++) {
+            if (bars[i].start < duration)
+                newBarIndex = i;
+            else
+                break;
+        }
+
+        if (newBarIndex != this.status.barIndex) {
+            this.status.barIndex = newBarIndex;
+            var factor = bars[newBarIndex].confidence;
+            var width = factor * 200 + 100;
+            var height = factor * 100 + 50;
+            this.addObstacle(width, height, Math.random());
+        }
+    }
+
+    setTrack(track) {
+        this.track = track;
+        this.track.analysis.bars = [this.track.analysis.bars[0], this.track.analysis.bars[1]];
+    }
+
+    setColor() {
+        let newColor = null;
+        do {
+            let colorIndex = Math.round(Math.random() * (COLORS.length - 1));
+            newColor = COLORS[colorIndex];
+        } while (newColor == this.color);
+        this.color = newColor;
+    }
+
+    addPlayer() {
+        let playerGraphics = new PIXI.Graphics()
+            .lineStyle(0)
+            .beginFill(this.color.complement, 1)
+            .drawCircle(0, 0, this.playerRadius)
+            .endFill();
+        playerGraphics.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
+        this.app.stage.addChild(playerGraphics);
+        this.elements.player = playerGraphics;
+    }
+
+    refreshPlayer() {
+        let playerX = this.elements.player.x;
+        let playerY = this.elements.player.y;
+        let playerGraphics = new PIXI.Graphics()
+            .lineStyle(0)
+            .beginFill(this.color.complement, 1)
+            .drawCircle(0, 0, this.playerRadius)
+            .endFill();
+        playerGraphics.position.set(playerX, playerY);
+        this.app.stage.removeChild(this.elements.player);
+        this.app.stage.addChild(playerGraphics);
+        this.elements.player = playerGraphics;
+    }
+
+    addScore() {
+        let scoreText = new PIXI.Text("",
+            {fontFamily : 'Courier New', fontSize: 20, fill : this.color.complement }
+        );
+        scoreText.x = 20;
+        scoreText.y = 20;
+        this.app.stage.addChild(scoreText);
+        this.elements.score = scoreText;
+        this.updateScore();
+    }
+
+    addObstacle(width, height, xPosition) {
+        var xLimit = this.app.renderer.width - width;
+        var graphics = new PIXI.Graphics();
+        graphics.beginFill(this.color.complement, 1);
+        graphics.drawRect(xLimit * xPosition, 0, width, height);
+
+        this.app.stage.addChild(graphics);
+        this.obstacles.push(graphics);
+    }
+
+    updateScore() {
+        this.elements.score.setText('SCORE ' + this.score + "\nHITS " + this.hits);
+    }
+
+    isPlayerColliding() {
+        var playerX = this.elements.player.x;
+        var playerY = this.elements.player.y;
+        var playerWidth = this.playerRadius * 2;
+        var playerHeight = this.playerRadius * 2;
+        for (var i = 0; i < this.obstacles.length; i++) {
+            var ob = this.obstacles[i].getBounds();
+            var isColiding = ob.x + ob.width > playerX && 
+                ob.x < playerX + playerWidth && 
+                ob.y + ob.height > playerY && 
+                ob.y < playerY + playerHeight;
+            if (isColiding) {
+                if (this.obstacles[i] == this.lastCollision)
+                    return false;
+                this.lastCollision = this.obstacles[i];
+                return true;
+            }
+        }
+        return false;
+    }
+
+    updatePlayerCollision() {
+        if (this.isPlayerColliding()) {
+            this.hits += 1;
+            this.updateScore()
+        }
+    }
+
+    resize() {
+        const parent = this.app.view.parentNode;
+        this.app.renderer.resize(parent.clientWidth, parent.clientHeight);
+        this.elements.player.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
+        console.log("Using width: ", this.app.renderer.width, " and height: ", this.app.renderer.height);
+    }
+}
+var gameViewElement = document.getElementById('game-view');
+let track = JSON.parse(mock);
+let game = new Game(gameViewElement, track);
 
 // Listen for window resize events
-window.addEventListener('resize', resize);
-
-// Resize function window
-function resize() {
-    const parent = app.view.parentNode;
-    app.renderer.resize(parent.clientWidth, parent.clientHeight);
-    console.log("Using width: ", app.renderer.width, " and height: ", app.renderer.height);
-}
-
-resize();
+window.addEventListener('resize', () => game.resize());
+game.resize();
