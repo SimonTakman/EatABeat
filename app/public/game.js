@@ -1,8 +1,25 @@
+const COLORS = [
+    { main: 0xCEF564, complement: 0x1E3264 },
+    { main: 0xF573A1, complement: 0xC3F0C9 },
+    { main: 0xFFC864, complement: 0x9FC3D1 },
+    { main: 0xFFCCD3, complement: 0x9FC3D1 }
+];
+
 class Game {
     constructor(container, track) {
-        this.track = track;
+        this.setTrack(track);
+        this.setColor();
         this.elements = {};
+        this.obstacles = [];
         this.score = 0;
+        this.hits = 0;
+        this.lastCollision = null;
+        this.status = {
+            beatIndex: 0,
+            barIndex: -1
+        };
+        this.startTime = (new Date()).getTime();
+        this.playerRadius = 18;
 
         // Clear container
         while (container.firstChild) {
@@ -10,10 +27,11 @@ class Game {
         }
 
         // Create App
-        this.app = new PIXI.Application({backgroundColor : 0x1099bb, autoResize: true });
+        this.app = new PIXI.Application({backgroundColor : this.color.main, autoResize: true });
         container.appendChild(this.app.view);
         this.addPlayer();
         this.addScore();
+        this.app.ticker.add((delta) => this.onTickEvent(delta));
 
         // Mouse move to move player
         let cb = (e) => {
@@ -22,105 +40,140 @@ class Game {
         };
         container.addEventListener('mousemove', cb);
         container.addEventListener('touchmove', cb);
+    }
 
+    onGameEnd() {
+        let possibleHits = this.track.analysis.bars.length;
+        this.score += (possibleHits - this.hits) / this.track.analysis.bars.length * 100;
+        this.hits = 0;
+        this.updateScore();
+
+        // TODO: Temp, start over
         this.reset();
     }
 
-    start() {
-        var d = new Date();
-        var startTime = d.getTime();
-        function getDuration() {
-            return ((new Date()).getTime() - startTime) / 1000;
-        }
+    reset() {
+        this.startTime = (new Date()).getTime();
+        this.status.beatIndex = 0;
+        this.status.barIndex = -1;
 
-        let beats = this.track.analysis.beats;
-        let bars = this.track.analysis.bars;
-
-        let lastBarIndex = -1;
-        let currentBeatIndex = 0;
-        // Listen for animate update
-        this.app.ticker.add((delta) => {
-
-            // TODO: Actual duration of song
-            var duration = getDuration();
-
-            /* Update positions */
-            // Use beats for speed factor
-            for (var i = currentBeatIndex; i < beats.length; i++) {
-                if (beats[i].start < duration)
-                    currentBeatIndex = i;
-                else
-                    break;
-            }
-            let speed = (1 / beats[currentBeatIndex].duration) ** 2;
-
-            // Update obstacles
-            this.obstacles.forEach((o, index) => {
-                // Delta is the built in frame-independent transformation
-                o.y += 1 * delta  * speed;
-                if (o.y > this.app.renderer.height) {
-                    this.app.stage.removeChild(o);
-                    this.obstacles.splice(index, 1);
-                }
-            });
-            
-            /* Update model */
-            this.updatePlayerCollision();
-
-            var newBarIndex = lastBarIndex;
-            for (var i = lastBarIndex + 1; i < bars.length; i++) {
-                if (bars[i].start < duration)
-                    newBarIndex = i;
-                else
-                    break;
-            }
-
-
-            if (newBarIndex != lastBarIndex) {
-                lastBarIndex = newBarIndex;
-                var factor = bars[newBarIndex].confidence;
-                var width = factor * 200 + 100;
-                var height = factor * 100 + 50;
-                this.addObstacle(width, height, Math.random());
-            }
-            else if (lastBarIndex == bars.length - 1) {
-                console.log("Done with bars");
-            }
-        });
+        this.setColor();
+        this.app.renderer.backgroundColor = this.color.main;
+        this.refreshPlayer();
+        this.app.stage.removeChild(this.elements.score);
+        this.addScore();
     }
 
-    reset() {
-        this.obstacles = [];
-        this.score = 10000;
+    getDuration() {
+        // TODO: Actual duration of song
+        return ((new Date()).getTime() - this.startTime) / 1000;
+    }
+
+    onTickEvent(delta) {
+        let beats = this.track.analysis.beats;
+        let bars = this.track.analysis.bars;
+        var duration = this.getDuration();
+
+        /* Update positions */
+        // Use beats for speed factor
+        for (var i = this.status.beatIndex; i < beats.length; i++) {
+            if (beats[i].start < duration)
+                this.status.beatIndex = i;
+            else
+                break;
+        }
+        let speed = (1 / beats[this.status.beatIndex].duration) ** 2;
+
+        // Update obstacles
+        this.obstacles.forEach((o, index) => {
+            // Delta is the built in frame-independent transformation
+            o.y += 1 * delta  * speed;
+            if (o.y > this.app.renderer.height) {
+                this.app.stage.removeChild(o);
+                this.obstacles.splice(index, 1);
+
+                if (this.obstacles.length == 0 && this.status.barIndex == bars.length - 1) {
+                    // Game ended
+                    console.log("End of game");
+                    this.onGameEnd();
+                }
+            }
+        });
+        
+        /* Update model */
+        this.updatePlayerCollision();
+
+        var newBarIndex = this.status.barIndex;
+        for (var i = this.status.barIndex + 1; i < bars.length; i++) {
+            if (bars[i].start < duration)
+                newBarIndex = i;
+            else
+                break;
+        }
+
+        if (newBarIndex != this.status.barIndex) {
+            this.status.barIndex = newBarIndex;
+            var factor = bars[newBarIndex].confidence;
+            var width = factor * 200 + 100;
+            var height = factor * 100 + 50;
+            this.addObstacle(width, height, Math.random());
+        }
+    }
+
+    setTrack(track) {
+        this.track = track;
+        this.track.analysis.bars = [this.track.analysis.bars[0], this.track.analysis.bars[1]];
+    }
+
+    setColor() {
+        let newColor = null;
+        do {
+            let colorIndex = Math.round(Math.random() * (COLORS.length - 1));
+            newColor = COLORS[colorIndex];
+        } while (newColor == this.color);
+        this.color = newColor;
     }
 
     addPlayer() {
-        let playerRadius = 18;
         let playerGraphics = new PIXI.Graphics()
             .lineStyle(0)
-            .beginFill(0xFFFF0B, 1)
-            .drawCircle(0, 0, playerRadius)
+            .beginFill(this.color.complement, 1)
+            .drawCircle(0, 0, this.playerRadius)
             .endFill();
+        playerGraphics.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
         this.app.stage.addChild(playerGraphics);
         this.elements.player = playerGraphics;
-        this.playerRadius = 18;
+    }
+
+    refreshPlayer() {
+        let playerX = this.elements.player.x;
+        let playerY = this.elements.player.y;
+        let playerGraphics = new PIXI.Graphics()
+            .lineStyle(0)
+            .beginFill(this.color.complement, 1)
+            .drawCircle(0, 0, this.playerRadius)
+            .endFill();
+        playerGraphics.position.set(playerX, playerY);
+        this.app.stage.removeChild(this.elements.player);
+        this.app.stage.addChild(playerGraphics);
+        this.elements.player = playerGraphics;
     }
 
     addScore() {
-        let scoreText = new PIXI.Text(
-            'SCORE ' + this.score ,
-            {fontFamily : 'Courier New', fontSize: 20, fill : 0x000000, align : 'center'}
+        let scoreText = new PIXI.Text("",
+            {fontFamily : 'Courier New', fontSize: 20, fill : this.color.complement }
         );
         scoreText.x = 20;
         scoreText.y = 20;
         this.app.stage.addChild(scoreText);
         this.elements.score = scoreText;
+        this.updateScore();
     }
 
     addObstacle(width, height, xPosition) {
         var xLimit = this.app.renderer.width - width;
         var graphics = new PIXI.Graphics();
-        graphics.beginFill(0xFF700B, 1);
+        graphics.beginFill(this.color.complement, 1);
         graphics.drawRect(xLimit * xPosition, 0, width, height);
 
         this.app.stage.addChild(graphics);
@@ -128,7 +181,7 @@ class Game {
     }
 
     updateScore() {
-        this.elements.score.setText("SCORE " + this.score);
+        this.elements.score.setText('SCORE ' + this.score + "\nHITS " + this.hits);
     }
 
     isPlayerColliding() {
@@ -142,15 +195,19 @@ class Game {
                 ob.x < playerX + playerWidth && 
                 ob.y + ob.height > playerY && 
                 ob.y < playerY + playerHeight;
-            if (isColiding)
+            if (isColiding) {
+                if (this.obstacles[i] == this.lastCollision)
+                    return false;
+                this.lastCollision = this.obstacles[i];
                 return true;
+            }
         }
         return false;
     }
 
     updatePlayerCollision() {
         if (this.isPlayerColliding()) {
-            this.score += 1;
+            this.hits += 1;
             this.updateScore()
         }
     }
@@ -169,4 +226,3 @@ let game = new Game(gameViewElement, track);
 // Listen for window resize events
 window.addEventListener('resize', () => game.resize());
 game.resize();
-game.start();
