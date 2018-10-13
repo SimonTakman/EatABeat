@@ -134,29 +134,32 @@ class Game {
         this.color = newColor;
     }
 
+    createPlayer(x, y) {
+        var playerSprite = PIXI.Sprite.fromImage('assets/sprites/player_chubby.png')
+        // center the sprite's anchor point
+        playerSprite.anchor.set(0.5);
+        // move the sprite to the center of the screen
+        playerSprite.x = x;
+        playerSprite.y = y;
+        playerSprite.width = this.playerRadius * 2;
+        playerSprite.height = this.playerRadius * 2;
+        playerSprite.tint = this.color.complement;
+        return playerSprite;
+    }
+
     addPlayer() {
-        let playerGraphics = new PIXI.Graphics()
-            .lineStyle(0)
-            .beginFill(this.color.complement, 1)
-            .drawCircle(0, 0, this.playerRadius)
-            .endFill();
-        playerGraphics.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
-        this.app.stage.addChild(playerGraphics);
-        this.elements.player = playerGraphics;
+        let playerSprite = this.createPlayer(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
+        this.app.stage.addChild(playerSprite);
+        this.elements.player = playerSprite;
     }
 
     refreshPlayer() {
         let playerX = this.elements.player.x;
         let playerY = this.elements.player.y;
-        let playerGraphics = new PIXI.Graphics()
-            .lineStyle(0)
-            .beginFill(this.color.complement, 1)
-            .drawCircle(0, 0, this.playerRadius)
-            .endFill();
-        playerGraphics.position.set(playerX, playerY);
+        let playerSprite = this.createPlayer(playerX, playerY);
         this.app.stage.removeChild(this.elements.player);
-        this.app.stage.addChild(playerGraphics);
-        this.elements.player = playerGraphics;
+        this.app.stage.addChild(playerSprite);
+        this.elements.player = playerSprite;
     }
 
     addScore() {
