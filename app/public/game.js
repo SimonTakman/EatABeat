@@ -1,15 +1,40 @@
-var height = document.body.height;
-var width = document.body.width;
-
 var app = new PIXI.Application({backgroundColor : 0x1099bb, autoResize: true });
 var gameViewElement = document.getElementById('game-view');
 gameViewElement.appendChild(app.view);
 
 let obstacles = [];
+let score = 10000;
 
 let data = JSON.parse(mock);
 let beats = data.analysis.beats;
-console.log(beats);
+let bars = data.analysis.bars;
+console.log("Beats", beats);
+console.log("Bars", bars);
+
+// Add player
+let playerRadius = 18;
+let playerGraphics = new PIXI.Graphics()
+    .lineStyle(0)
+    .beginFill(0xFFFF0B, 1)
+    .drawCircle(0, 0, playerRadius)
+    .endFill();
+app.stage.addChild(playerGraphics);
+
+// Add score
+let scoreText = new PIXI.Text(
+    'SCORE ' + score ,
+    {fontFamily : 'Courier New', fontSize: 20, fill : 0x000000, align : 'center'}
+);
+scoreText.x = 20;
+scoreText.y = 20;
+app.stage.addChild(scoreText);
+
+// Mouse move to move player
+gameViewElement.addEventListener('mousemove', function(e) {
+    playerGraphics.position.x = e.clientX;
+
+    updatePlayerCollision();
+});
 
 function addObstacle(width, height, xPosition) {
     var xLimit = app.renderer.width - width;
@@ -21,45 +46,84 @@ function addObstacle(width, height, xPosition) {
     obstacles.push(graphics);
 }
 
+function playerIsColliding() {
+    var playerX = playerGraphics.x;
+    var playerY = playerGraphics.y;
+    var playerWidth = playerRadius * 2;
+    var playerHeight = playerRadius * 2;
+    for (var i = 0; i < obstacles.length; i++) {
+        var ob = obstacles[i].getBounds();
+        var isColiding = ob.x + ob.width > playerX && 
+            ob.x < playerX + playerWidth && 
+            ob.y + ob.height > playerY && 
+            ob.y < playerY + playerHeight;
+        if (isColiding)
+            return true;
+    }
+    return false;
+}
+
+function updatePlayerCollision() {
+    if (playerIsColliding()) {
+        score -= 1;
+        scoreText.setText("SCORE " + score);
+    }
+}
+
 var d = new Date();
 var startTime = d.getTime();
 function getDuration() {
     return ((new Date()).getTime() - startTime) / 1000;
 }
 
-let lastBeat = -1;
+let lastBarIndex = -1;
+let currentBeatIndex = 0;
+let speedFactor = 1;
 // Listen for animate update
 app.ticker.add(function(delta) {
-    // just for fun, let's rotate mr rabbit a little
-    // delta is 1 if running at 100% performance
-    // creates frame-independent transformation
-    // bunny.rotation += 0.1 * delta;
+    // TODO: Actual duration of song
+    var duration = getDuration();
 
     /* Update positions */
+    // Use beats for speed factor
+    for (var i = currentBeatIndex; i < beats.length; i++) {
+        if (beats[i].start < duration)
+            currentBeatIndex = i;
+        else
+            break;
+    }
+    let speed = (1 / beats[currentBeatIndex].duration) ** 2;
+
+    // Update obstacles
     obstacles.forEach((o, index) => {
-        o.y += 1;
+        // Delta is the built in frame-independent transformation
+        o.y += 1 * delta  * speed;
         if (o.y > app.renderer.height) {
             app.stage.removeChild(o);
             obstacles.splice(index, 1);
         }
     });
 
-    /* Spawn new things */
-    var duration = getDuration();
-    var newBeat = lastBeat;
-    for (var i = lastBeat + 1; i < beats.length; i++) {
-        if (beats[i].start < duration)
-            newBeat = i;
+    /* Update model */
+    updatePlayerCollision();
+
+    var newBarIndex = lastBarIndex;
+    for (var i = lastBarIndex + 1; i < bars.length; i++) {
+        if (bars[i].start < duration)
+            newBarIndex = i;
         else
             break;
     }
 
-    if (newBeat != lastBeat) {
-        lastBeat = newBeat;
-        addObstacle(100, 50, Math.random());
+    if (newBarIndex != lastBarIndex) {
+        lastBarIndex = newBarIndex;
+        var factor = bars[newBarIndex].confidence;
+        var width = factor * 200 + 100;
+        var height = factor * 100 + 50;
+        addObstacle(width, height, Math.random());
     }
-    else if (lastBeat == beats.length - 1) {
-        console.log("Done with beats");
+    else if (lastBarIndex == bars.length - 1) {
+        console.log("Done with bars");
     }
 });
 
@@ -70,6 +134,7 @@ window.addEventListener('resize', resize);
 function resize() {
     const parent = app.view.parentNode;
     app.renderer.resize(parent.clientWidth, parent.clientHeight);
+    playerGraphics.position.set(app.renderer.width * 0.5, app.renderer.height - playerRadius * 2);
     console.log("Using width: ", app.renderer.width, " and height: ", app.renderer.height);
 }
 
