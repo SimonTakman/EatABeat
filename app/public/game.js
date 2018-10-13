@@ -31,6 +31,7 @@ class Game {
         container.appendChild(this.app.view);
         this.addPlayer();
         this.addScore();
+        this.addExit();
         this.app.ticker.add((delta) => this.onTickEvent(delta));
 
         // Mouse move to move player
@@ -38,8 +39,12 @@ class Game {
             this.elements.player.position.x = e.clientX;
             this.updatePlayerCollision();
         };
+        let touchCb = (e) => {
+            this.elements.player.position.x = e.targetTouches[0].clientX;
+            this.updatePlayerCollision();
+        };
         container.addEventListener('mousemove', cb);
-        container.addEventListener('touchmove', cb);
+        container.addEventListener('touchmove', touchCb);
     }
 
     onGameEnd() {
@@ -62,6 +67,8 @@ class Game {
         this.refreshPlayer();
         this.app.stage.removeChild(this.elements.score);
         this.addScore();
+        this.app.stage.removeChild(this.elements.exit);
+        this.addExit();
     }
 
     getDuration() {
@@ -173,6 +180,19 @@ class Game {
         this.updateScore();
     }
 
+    addExit() {
+        let exitText = new PIXI.Text("EXIT",
+            {fontFamily : 'Courier New', fontSize: 24, fill : this.color.complement }
+        );
+        exitText.x = this.app.renderer.width - 100;
+        exitText.y = 20;
+        exitText.interactive = true;
+        exitText.buttonMode = true;
+        exitText.on("click", () => window.location.pathname = "");
+        this.app.stage.addChild(exitText);
+        this.elements.exit = exitText;
+    }
+
     addObstacle(width, height, xPosition) {
         var xLimit = this.app.renderer.width - width;
         var graphics = new PIXI.Graphics();
@@ -219,6 +239,7 @@ class Game {
         const parent = this.app.view.parentNode;
         this.app.renderer.resize(parent.clientWidth, parent.clientHeight);
         this.elements.player.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
+        this.elements.exit.position.set(this.app.renderer.width - 100, 20);
         console.log("Using width: ", this.app.renderer.width, " and height: ", this.app.renderer.height);
     }
 }
