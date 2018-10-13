@@ -259,9 +259,10 @@ class Game {
                 fill: this.color.complement
             }
         );
-        titleText.x = this.app.renderer.width / 2;
+        titleText.x = window.innerWidth / 2 - titleText.width / 2;
         titleText.y = 20;
         this.app.stage.addChild(titleText);
+        this.elements.titleText = titleText;
     }
 
     addExit() {
@@ -341,6 +342,7 @@ class Game {
         this.app.renderer.resize(parent.clientWidth, parent.clientHeight);
         this.elements.player.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
         this.elements.exit.position.set(this.app.renderer.width - 80, 20);
+        this.elements.titleText.position.set(window.innerWidth / 2 - this.elements.titleText.width / 2, 20);
         this.elements.ouch.position.set(this.app.renderer.width / 2 - 50, this.app.renderer.height / 2);
         console.log("Using width: ", this.app.renderer.width, " and height: ", this.app.renderer.height);
     }
