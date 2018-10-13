@@ -75,7 +75,7 @@ app.get('/search', function (request, response) {
 });
 
 app.get('/trackInfo', function (request, response) {
-  var trackInfo = {features: {}, analysis: {}};
+  var trackInfo = {features: {}, analysis: {}, track: {}};
   var loggedInSpotifyApi = new SpotifyWebApi();
   loggedInSpotifyApi.setAccessToken(request.headers['authorization'].split(' ')[1]);
   /* Get Audio Features for a Track */
@@ -86,7 +86,14 @@ app.get('/trackInfo', function (request, response) {
       loggedInSpotifyApi.getAudioAnalysisForTrack(request.query.track_id)
         .then(function(data) {
           trackInfo.analysis = data.body;
-          response.send(trackInfo)
+          loggedInSpotifyApi.getTrack(request.query.track_id)
+            .then(function(data) {
+              trackInfo.track = data.body;
+              response.send(trackInfo);
+              //console.log(data.body);
+            }, function(err) {
+              console.log(err);
+            });
           //console.log(data.body);
         }, function(err) {
           console.log(err);
