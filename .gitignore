@@ -1,0 +1,4 @@
+.env
+node_modules
+.sonarlint
+.DS_STORE
