@@ -17,15 +17,8 @@ function initPlayback() {
 
     // Playback status updates
     player.on('player_state_changed', state => {
-      console.log(state)
       $('#current-track').attr('src', state.track_window.current_track.album.images[0].url);
       $('#current-track-name').text(state.track_window.current_track.name);
-    });
-
-    // Ready
-    player.on('ready', data => {
-      console.log('Ready with Device ID', data.device_id);
-      play(data.device_id, Cookies.get('track_id'));
     });
 
     // Connect to the player!
@@ -35,19 +28,30 @@ function initPlayback() {
 }
 
 // Play a specified track on the Web Playback SDK's device ID
-function play(device_id, track_id) {
+function play(track_id) {
+  console.log("TRYING TO PLAY");
   const token = Cookies.get('access_token');
-  if (token && track_id) {
-    $.ajax({
-     url: "https://api.spotify.com/v1/me/player/play?device_id=" + device_id,
-     type: "PUT",
-     data: '{"uris": ["spotify:track:' + track_id +'"]}',
-     beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + token );},
-     success: function(data) {
-       console.log(data);
-     }
+  return new Promise(function(resolve, reject) {
+    player.on('ready', data => {
+      console.log('Ready with Device ID', data.device_id);
+      var device_id = data.device_id;
+      
+      if (token && track_id) {
+        $.ajax({
+          url: "https://api.spotify.com/v1/me/player/play?device_id=" + device_id,
+          type: "PUT",
+          data: '{"uris": ["spotify:track:' + track_id +'"]}',
+          beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + token );},
+          success: function(data) {
+            console.log("Play data", data);
+            resolve();
+          }
+        });
+      }
+      else
+        reject();
     });
-  }
+  });
 }
 
 function pause() {

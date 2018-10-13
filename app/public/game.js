@@ -19,7 +19,6 @@ class Game {
             beatIndex: 0,
             barIndex: -1
         };
-        this.startTime = (new Date()).getTime();
         this.playerRadius = 18;
         this.isDamaging = false;
 
@@ -29,7 +28,7 @@ class Game {
         }
 
         // Create App
-        this.app = new PIXI.Application({backgroundColor : this.color.main, autoResize: true });
+        this.app = new PIXI.Application({backgroundColor : this.color.main, autoResize: true, autoStart: false });
         container.appendChild(this.app.view);
         this.addPlayer();
         this.addScore();
@@ -60,6 +59,11 @@ class Game {
         this.reset();
     }
 
+    start() {
+        this.startTime = (new Date()).getTime();
+        this.app.start();
+    }
+
     reset() {
         this.startTime = (new Date()).getTime();
         this.status.beatIndex = 0;
@@ -75,7 +79,6 @@ class Game {
     }
 
     getDuration() {
-        // TODO: Actual duration of song
         return ((new Date()).getTime() - this.startTime) / 1000;
     }
 
@@ -85,21 +88,10 @@ class Game {
         let bars = this.track.analysis.bars;
         var duration = this.getDuration();
 
-        /* Update positions */
-        // Use beats for speed factor
-        for (var i = this.status.beatIndex; i < beats.length; i++) {
-            if (beats[i].start < duration) {
-                this.status.beatIndex = i;
-              }
-            else
-                break;
-        }
-        let speed = (1 / beats[this.status.beatIndex].duration) ** 2;
-
         // Update obstacles
         this.obstacles.forEach((o, index) => {
             // Delta is the built in frame-independent transformation
-            o.y += 1 * delta  * speed;
+            o.y += 1 * delta  * this.speed;
             if (o.y > this.app.renderer.height) {
                 this.app.stage.removeChild(o);
                 this.obstacles.splice(index, 1);
@@ -118,9 +110,7 @@ class Game {
         var newBarIndex = this.status.barIndex;
         for (var i = this.status.barIndex + 1; i < beats.length; i++) {
             if (beats[i].start < duration) {
-              if (i % 2 == 0) {
                 newBarIndex = i;
-              }
             }
             else
                 break;
@@ -128,15 +118,22 @@ class Game {
 
         if (newBarIndex != this.status.barIndex) {
             this.status.barIndex = newBarIndex;
-            var factor = bars[newBarIndex].confidence;
-            var width = factor * 200 + 100;
-            var height = factor * 100 + 50;
+            var factor = beats[newBarIndex].confidence;
+            console.log(factor);
+            var width = factor * 200 + 50;
+            var height = factor * 100 + 25;
             this.addObstacle(width, height, Math.random());
         }
     }
 
     setTrack(track) {
         this.track = track;
+        // Calculate speed from tempo
+        let minTempo = 90;
+        let maxTempo = 160;
+        let tempo = Math.max(Math.min(this.track.features.tempo, maxTempo), minTempo)
+        let tempoScaled = (tempo - minTempo) / (maxTempo - minTempo);
+        this.speed = tempoScaled * 10 + 0.5;
         //this.track.analysis.bars = [this.track.analysis.bars[0], this.track.analysis.bars[1]];
     }
 
@@ -334,10 +331,14 @@ let accessToken = Cookies.get("access_token")
 if(track && accessToken){
   initPlayback();
   $.get({url: '/trackInfo', headers:{"Authorization": `Bearer ${accessToken}`}, data: {track_id: track}}, function(data){
-    console.log("Hae")
-    console.log(data)
     game = new Game(gameViewElement, data);
     game.resize();
+    play(Cookies.get('track_id'))
+    .then(() => {
+        console.log("GOOOO");
+        game.start();
+    })
+    .catch(() => console.log("NOO"));
   })
 }
 
