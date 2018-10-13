@@ -22,3 +22,6 @@ Node.js using express hosting.
 
 ## Frontend
 Game engine through [Pixie.js](https://github.com/pixijs/pixi.js)
+
+## Pixi Particles ##
+https://github.com/pixijs/pixi-particles
