@@ -8,16 +8,17 @@
   box-sizing: border-box;
 }
 
-body {
-  padding: 5vh 5vw;
+header {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
 }
 
-footer {
-  margin-top: 50px;
-  padding-top: 25px;
-  border-top: 1px solid lightgrey;
+main {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
 }
 
-.nicejob {
-  text-decoration: line-through;
-}
