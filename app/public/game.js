@@ -80,6 +80,7 @@ class Game {
     }
 
     onTickEvent(delta) {
+        let sections = this.track.analysis.sections;
         let beats = this.track.analysis.beats;
         let bars = this.track.analysis.bars;
         var duration = this.getDuration();
@@ -87,8 +88,9 @@ class Game {
         /* Update positions */
         // Use beats for speed factor
         for (var i = this.status.beatIndex; i < beats.length; i++) {
-            if (beats[i].start < duration)
+            if (beats[i].start < duration) {
                 this.status.beatIndex = i;
+              }
             else
                 break;
         }
@@ -109,14 +111,17 @@ class Game {
                 }
             }
         });
-        
+
         /* Update model */
         this.updatePlayerCollision();
 
         var newBarIndex = this.status.barIndex;
-        for (var i = this.status.barIndex + 1; i < bars.length; i++) {
-            if (bars[i].start < duration)
+        for (var i = this.status.barIndex + 1; i < beats.length; i++) {
+            if (beats[i].start < duration) {
+              if (i % 2 == 0) {
                 newBarIndex = i;
+              }
+            }
             else
                 break;
         }
@@ -283,9 +288,9 @@ class Game {
         var playerHeight = this.playerRadius * 2;
         for (var i = 0; i < this.obstacles.length; i++) {
             var ob = this.obstacles[i].getBounds();
-            var isColiding = ob.x + ob.width > playerX && 
-                ob.x < playerX + playerWidth && 
-                ob.y + ob.height > playerY && 
+            var isColiding = ob.x + ob.width > playerX &&
+                ob.x < playerX + playerWidth &&
+                ob.y + ob.height > playerY &&
                 ob.y < playerY + playerHeight;
             if (isColiding)
                 return i;
@@ -329,11 +334,11 @@ let accessToken = Cookies.get("access_token")
 if(track && accessToken){
   initPlayback();
   $.get({url: '/trackInfo', headers:{"Authorization": `Bearer ${accessToken}`}, data: {track_id: track}}, function(data){
-    console.log("Hae")    
+    console.log("Hae")
     console.log(data)
     game = new Game(gameViewElement, data);
     game.resize();
-  }) 
+  })
 }
 
 // Listen for window resize events
