@@ -1,0 +1,46 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Spotify Authorization Code Flow Example</title>
+    <meta name="description" content="OAuth 2 Authorization Code Flow example for Spotify.">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.com/project-avatar/b96c147f-8065-40a6-9908-4fcafce2a361.png" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://sp-bootstrap.global.ssl.fastly.net/8.0.0/sp-bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>
+        Spotify Authorization Code Flow
+      </h1>
+    </header>
+
+    <main>
+      <button class="btn btn-primary" id="login">Don't see anything? Log in!</button>
+      <a href="/logout" class="btn btn-secondary">Logout</a>
+      <div id="data-container">
+        <ol>
+          <!-- This is where we will append our data -->
+        </ol>
+      </div>
+    </main>
+
+    <footer>
+      <a href="https://glitch.com/edit/#!/spotify-authorization-code">
+        <h2>Remix this in Glitch</h2>
+      </a>
+    </footer>
+
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="/client.js"></script>
+
+  </body>
+</html>
