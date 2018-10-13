@@ -10,6 +10,7 @@ class Game {
     constructor(container, track) {
         this.setTrack(track);
         this.setColor();
+        this.windowWidth = 0;
         this.elements = {};
         this.obstacles = [];
         this.score = 0;
@@ -121,7 +122,7 @@ class Game {
             this.status.barIndex = newBarIndex;
             var factor = beats[newBarIndex].confidence;
             console.log(factor);
-            var width = factor * 200 + 50;
+            var width = factor * (this.windowWidth / 2);
             var height = factor * 100 + 25;
             this.addObstacle(width, height, Math.random());
         }
@@ -336,6 +337,7 @@ class Game {
 
     resize() {
         const parent = this.app.view.parentNode;
+        this.windowWidth = parent.clientWidth;
         this.app.renderer.resize(parent.clientWidth, parent.clientHeight);
         this.elements.player.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
         this.elements.exit.position.set(this.app.renderer.width - 80, 20);
