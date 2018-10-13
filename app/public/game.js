@@ -121,7 +121,6 @@ class Game {
         if (newBarIndex != this.status.barIndex) {
             this.status.barIndex = newBarIndex;
             var factor = beats[newBarIndex].confidence;
-            console.log(factor);
             var width = factor * (this.windowWidth / 2);
             var height = factor * 100 + 25;
             this.addObstacle(width, height, Math.random());
@@ -133,9 +132,10 @@ class Game {
         // Calculate speed from tempo
         let minTempo = 90;
         let maxTempo = 160;
+        console.log(this.track.features.tempo);
         let tempo = Math.max(Math.min(this.track.features.tempo, maxTempo), minTempo)
         let tempoScaled = (tempo - minTempo) / (maxTempo - minTempo);
-        this.speed = tempoScaled * 10 + 0.5;
+        this.speed = tempoScaled * 5 + 5;
         //this.track.analysis.bars = [this.track.analysis.bars[0], this.track.analysis.bars[1]];
     }
 
