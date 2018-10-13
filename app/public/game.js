@@ -33,6 +33,7 @@ class Game {
         container.appendChild(this.app.view);
         this.addPlayer();
         this.addScore();
+        this.addTitle();
         this.addExit();
         this.addOuch();
         this.app.ticker.add((delta) => this.onTickEvent(delta));
@@ -143,31 +144,31 @@ class Game {
     lightenColor(colorCode, amount) {
         console.log("Before", colorCode.toString(16));
         var num = parseInt(colorCode, 16);
-    
+
         var r = (num >> 16) + amount;
-    
+
         if (r > 255) {
             r = 255;
         } else if (r < 0) {
             r = 0;
         }
-    
+
         var b = ((num >> 8) & 0x00FF) + amount;
-    
+
         if (b > 255) {
             b = 255;
         } else if (b < 0) {
             b = 0;
         }
-    
+
         var g = (num & 0x0000FF) + amount;
-    
+
         if (g > 255) {
             g = 255;
         } else if (g < 0) {
             g = 0;
         }
-    
+
         let newColor = (g | (b << 8) | (r << 16));
         console.log("Before", newColor.toString(16));
         return newColor;
@@ -218,11 +219,11 @@ class Game {
 
     addScore() {
         let scoreText = new PIXI.Text("",
-            { 
-                fontFamily : 'Courier New', 
-                fontSize: 20, 
+            {
+                fontFamily : 'Courier New',
+                fontSize: 20,
                 fontWeight: 'bold',
-                fill: this.color.complement 
+                fill: this.color.complement
             }
         );
         scoreText.x = 20;
@@ -234,9 +235,9 @@ class Game {
 
     addOuch() {
         let ouchText = new PIXI.Text("OUCH!",
-            { 
-                fontFamily : 'Courier New', 
-                fontSize: 30, 
+            {
+                fontFamily : 'Courier New',
+                fontSize: 30,
                 fontWeight: 'bold',
                 fill: 0xFF0000
             }
@@ -249,13 +250,27 @@ class Game {
         this.updateScore();
     }
 
+    addTitle() {
+        let titleText = new PIXI.Text(this.track.track.artists[0].name + " - " + this.track.track.name,
+            {
+                fontFamily : 'Courier New',
+                fontSize: 24,
+                fontWeight: 'bold',
+                fill: this.color.complement
+            }
+        );
+        titleText.x = this.app.renderer.width / 2;
+        titleText.y = 20;
+        this.app.stage.addChild(titleText);
+    }
+
     addExit() {
         let exitText = new PIXI.Text("EXIT",
             {
-                fontFamily : 'Courier New', 
-                fontSize: 24, 
+                fontFamily : 'Courier New',
+                fontSize: 24,
                 fontWeight: 'bold',
-                fill: this.color.complement 
+                fill: this.color.complement
             }
         );
         exitText.x = this.app.renderer.width - 80;
