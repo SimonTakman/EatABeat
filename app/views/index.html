@@ -16,17 +16,18 @@
   </head>
   <body>
     <header>
-      <button class="btn btn-primary" id="login">Don't see anything? Log in!</button>
-      <a href="/logout" class="btn btn-secondary">Logout</a>
+      <button class="btn btn-primary" id="login">Log in</button>
+      <a href="/logout" class="btn btn-secondary" id="logout">Log out</a>
     </header>
 
     <main id="game-view">
     </main>
-    
+
     <!-- Your web-app is https, so your scripts need to be too -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="/client.js"></script>
     <script src="/game.js"></script>
 

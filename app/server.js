@@ -34,7 +34,7 @@ var spotifyApi = new SpotifyWebApi({
 
 app.get("/authorize", function (request, response) {
   var authorizeURL = spotifyApi.createAuthorizeURL(scopes, null, showDialog);
-  console.log(authorizeURL)
+  //console.log(authorizeURL)
   response.send(authorizeURL);
 });
 
@@ -44,8 +44,8 @@ app.get("/callback", function (request, response) {
 
   spotifyApi.authorizationCodeGrant(authorizationCode)
   .then(function(data) {
-    console.log(data)
-    response.redirect(`/#access_token=${data.body['access_token']}&refresh_token=${data.body['refresh_token']}`)
+    //console.log(data)
+    response.redirect(`/#access_token=${data.body['access_token']}&refresh_token=${data.body['refresh_token']}&expires_in=${data.body['expires_in']}`)
   }, function(err) {
     console.log('Something went wrong when retrieving the access token!', err.message);
   });
@@ -55,19 +55,19 @@ app.get("/logout", function (request, response) {
   response.redirect('/');
 });
 
-app.get('/myendpoint', function (request, response) {
+app.get('/search', function (request, response) {
   var loggedInSpotifyApi = new SpotifyWebApi();
-  console.log(request.headers['authorization'].split(' ')[1]);
+  //console.log(request.headers['authorization'].split(' ')[1]);
   loggedInSpotifyApi.setAccessToken(request.headers['authorization'].split(' ')[1]);
-  // Search for a track!
-  loggedInSpotifyApi.getMyTopTracks()
-    .then(function(data) {
-      console.log(data.body);
-      response.send(data.body);
-    }, function(err) {
-      console.error(err);
-    });
 
+  let query = 'track:' + request.query.query;
+
+  spotifyApi.searchTracks(query)
+  .then(function(data) {
+    response.send(data.body);
+  }, function(err) {
+    console.log(err)
+  });
 });
 
 
