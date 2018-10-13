@@ -40,7 +40,7 @@ $(function() {
       // "Data" is the array of track objects we get from the API. See server.js for the function that returns it.
       console.log(data);
     });
-    initPlayback();
+    //initPlayback();
 
   }
   else {
