@@ -40,34 +40,23 @@ $(function() {
     console.log(hash.expires_in);
     window.location.href = '/';
   }
-    /*
-    $.get({url: '/search', headers: {"Authorization": `Bearer ${hash.access_token}`}}, function(data) {
+
+  access_token = Cookies.get('access_token');
+  if (access_token) {
+    // Logged in
+    //console.log("Logged in");
+    $('#logout').show();
+    $('#login').hide();
+    // Get logged in user info
+    $.get({url: '/me', headers: {"Authorization": `Bearer ${access_token}`}}, function(data) {
       // "Data" is the array of track objects we get from the API. See server.js for the function that returns it.
-      console.log(data)
-
-      var title = $('<h3>Your top tracks on Spotify:</h3>');
-      title.prependTo('#data-container');
-
-      // For each of the tracks, create an element
-      data.items.forEach(function(track) {
-        var trackDiv = $('<li class="track"></li>');
-        trackDiv.text(track.name);
-        trackDiv.appendTo('#data-container ol');
-      });
+      console.log(data);
     });
-    */
-
-    access_token = Cookies.get('access_token');
-    if (access_token) {
-      // Logged in
-      //console.log("Logged in");
-      $('#logout').show();
-      $('#login').hide();
-    }
-    else {
-      // Not logged in
-      $('#logout').hide();
-      $('#login').show();
-    }
+  }
+  else {
+    // Not logged in
+    $('#logout').hide();
+    $('#login').show();
+  }
 
 });
