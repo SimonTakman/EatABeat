@@ -320,11 +320,15 @@ class Game {
             this.updateScore()
             this.app.stage.removeChild(this.obstacles[index]);
             this.obstacles.splice(index, 1);
+            this.elements.player.y = this.app.renderer.height - this.playerRadius * 3
+            this.elements.player.rotation -= 0.4
             this.elements.player.tint = 0xFF0000;
             this.elements.score.style.fill = 0xFF0000;
             this.elements.ouch.visible = true;
         } else if(this.elements.ouch.visible && !this.isDamaging) {
             setTimeout(() => {
+                this.elements.player.rotation = 0
+                this.elements.player.y = this.app.renderer.height - this.playerRadius * 2
                 this.elements.score.style.fill = this.color.complement;
                 this.elements.player.tint = this.color.complement;
                 this.elements.ouch.visible = false;
