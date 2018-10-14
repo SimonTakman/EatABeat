@@ -423,7 +423,6 @@ class Game {
 }
 var gameViewElement = document.getElementById('game-view');
 let track = Cookies.get("track_id");
-console.log("track")
 let game;
 let accessToken = Cookies.get("access_token")
 if(track && accessToken){
