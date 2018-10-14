@@ -133,7 +133,7 @@ class Game {
 
             // Spawning new obstacle
             var factor = beats[newBarIndex].confidence;
-            var radius = factor * (this.windowWidth / 5) + 2;
+            var radius = Math.max(factor * (this.windowWidth / 7), 15);
             this.addObstacle(radius, avgPitch);
         }
     }
