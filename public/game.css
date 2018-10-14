@@ -8,11 +8,6 @@
   src: url(assets/fonts/visitor1.ttf);
 }
 
-@font-face{
-  font-family: Visitor2;
-  src: url(assets/fonts/visitor2.ttf);
-}
-
 * {
   box-sizing: border-box;
 }
