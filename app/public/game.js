@@ -123,7 +123,7 @@ class Game {
         if (newBarIndex != this.status.barIndex) {
             this.status.barIndex = newBarIndex;
             var factor = beats[newBarIndex].confidence;
-            var radius = factor * (this.windowWidth / 5);
+            var radius = factor * (this.windowWidth / 5) + 2;
             this.addObstacle(radius, Math.random());
         }
     }
@@ -289,7 +289,7 @@ class Game {
         var xLimit = this.app.renderer.width;
         var graphics = new PIXI.Graphics();
         graphics.beginFill(this.color.complement, 1);
-        graphics.drawCircle(xLimit * xPosition, 0, radius);
+        graphics.drawCircle(xLimit * xPosition, -radius, radius);
 
         this.app.stage.addChild(graphics);
         this.obstacles.push(graphics);
