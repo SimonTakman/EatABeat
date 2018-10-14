@@ -428,16 +428,28 @@ let game;
 let accessToken = Cookies.get("access_token")
 if(track && accessToken){
   initPlayback();
-  $.get({url: '/trackInfo', headers:{"Authorization": `Bearer ${accessToken}`}, data: {track_id: track}}, function(data){
-    game = new Game(gameViewElement, data);
-    game.resize();
-    play(Cookies.get('track_id'))
-    .then(() => {
-        game.start();
-        gameViewElement.style.opacity = 1;
-    })
-    .catch(() => console.log("NOO"));
-  })
+  $.get({
+      url: '/trackInfo', 
+      headers:{"Authorization": `Bearer ${accessToken}`}, 
+      data: {track_id: track}, 
+      success: function(data){
+        game = new Game(gameViewElement, data);
+        game.resize();
+        play(Cookies.get('track_id'))
+        .then(() => {
+            game.start();
+            gameViewElement.style.opacity = 1;
+        })
+        .catch(() => {
+            console.log("ERROR");
+            alert("Unsupported platform");
+        });
+    },
+    error: function(data) {
+        console.log("ERROR");
+        alert("Unsupported platform");
+    }
+  });
 }
 
 // Listen for window resize events
