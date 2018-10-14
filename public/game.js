@@ -84,17 +84,14 @@ class Game {
     }
 
     onTickEvent(delta) {
-        let sections = this.track.analysis.sections;
         let beats = this.track.analysis.beats;
-        let bars = this.track.analysis.bars;
         var duration = this.getDuration();
-        let windowHeight = this.app.renderer.height;
 
         // Update obstacles
         this.obstacles.forEach((o, index) => {
             // Delta is the built in frame-independent transformation
             o.y += 1 * delta  * this.speed;
-            if (o.y > this.app.renderer.height) {
+            if (o.y > this.app.renderer.height + o.height) {
                 this.passedBeats += 1;
                 this.app.stage.removeChild(o);
                 this.obstacles.splice(index, 1);
