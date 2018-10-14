@@ -25,7 +25,8 @@ app.get("/game", function (request, response) {
 var SpotifyWebApi = require('spotify-web-api-node');
 
 // Replace with your redirect URI, required scopes, and show_dialog preference
-var redirectUri = 'http://localhost:3000/callback';
+var isProd = process.env.NODE_ENV == "production";
+var redirectUri = (isProd ? 'https://eatabeat.herokuapp.com' : 'http://localhost:3000') + "/callback";
 var scopes = ["streaming", "user-read-birthdate", "user-read-email", "user-read-private", "user-modify-playback-state"];
 var showDialog = true;
 
@@ -120,6 +121,6 @@ app.get('/me', function(request, response) {
 
 
 // listen for requests :)
-var listener = app.listen(3000, function () {
+var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
