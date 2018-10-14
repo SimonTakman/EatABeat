@@ -34,9 +34,9 @@ class Game {
         container.appendChild(this.app.view);
         this.addPlayer();
         this.addScore();
-        this.addTitle();
         this.addExit();
         this.addOuch();
+        this.addTitle();
         this.app.ticker.add((delta) => this.onTickEvent(delta));
 
         // Mouse move to move player
@@ -218,12 +218,12 @@ class Game {
 
     addScore() {
         let scoreText = new PIXI.Text("",
-            {
-                fontFamily : 'Courier New',
-                fontSize: 20,
-                fontWeight: 'bold',
-                fill: this.color.complement
-            }
+                          {
+                            fontFamily : 'Visitor',
+                            fontSize: 20,
+                            //fontWeight: 'bold',
+                            fill: this.color.complement
+                        }
         );
         scoreText.x = 20;
         scoreText.y = 20;
@@ -235,9 +235,10 @@ class Game {
     addOuch() {
         let ouchText = new PIXI.Text("YUM!",
             {
-                fontFamily : 'Courier New',
+                //TODO: Add Font
+                fontFamily : 'Visitor',
                 fontSize: 30,
-                fontWeight: 'bold',
+                //fontWeight: 'bold',
                 fill: 0x00FF00
             }
         );
@@ -251,15 +252,16 @@ class Game {
 
     addTitle() {
         let name = this.track.track.artists[0].name + " - " + this.track.track.name;
-        if (name.length > 24)
-            name = name.substring(0, 21) + '...';
+        if (name.length > 24){
+          name = name.substring(0, 21) + '...';
+        }
         let titleText = new PIXI.Text(name,
             {
-                fontFamily : 'Courier New',
-                fontSize: 20,
-                fontWeight: 'bold',
-                fill: this.color.complement
-            }
+              fontFamily : 'Visitor',
+              fontSize: 20,
+              //fontWeight: 'bold',
+              fill: this.color.complement
+          }
         );
         titleText.x = window.innerWidth / 2 - titleText.width / 2;
         titleText.y = 20;
@@ -270,9 +272,9 @@ class Game {
     addExit() {
         let exitText = new PIXI.Text("EXIT",
             {
-                fontFamily : 'Courier New',
+                fontFamily : 'Visitor',
                 fontSize: 24,
-                fontWeight: 'bold',
+                //fontWeight: 'bold',
                 fill: this.color.complement
             }
         );
