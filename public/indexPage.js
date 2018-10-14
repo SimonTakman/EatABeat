@@ -50,14 +50,13 @@ if (access_token) {
   // Get logged in user info
   $.get({url: '/me', headers: {"Authorization": `Bearer ${access_token}`}}, function(data) {
     // "Data" is the array of track objects we get from the API. See server.js for the function that returns it.
-    if (data.images[0].url) {
+    if (data.images.length > 0) {
       $('#avatar').attr("src", data.images[0].url);
       $('#avatar').attr("width", "40px");
       $('#avatar').css("border-radius", "50%");
       $('#avatar').css("float", "left");
     }
     $('#displayName').text(data.display_name);
-    console.log(data);
   });
 }
 else {
