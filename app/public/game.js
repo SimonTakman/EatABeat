@@ -21,7 +21,7 @@ class Game {
             beatIndex: 0,
             barIndex: -1
         };
-        this.playerRadius = 18;
+        this.playerRadius = 22;
         this.isDamaging = false;
         this.lastAveragePitch = 0;
 
@@ -274,7 +274,7 @@ class Game {
         let scoreText = new PIXI.Text("",
             {
                 fontFamily : 'Courier New',
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'bold',
                 fill: this.color.complement
             }
@@ -305,12 +305,12 @@ class Game {
 
     addTitle() {
         let name = this.track.track.artists[0].name + " - " + this.track.track.name;
-        if (name.length > 24)
-            name = name.substring(0, 21) + '...';
+        if (name.length > 22)
+            name = name.substring(0, 19) + '...';
         let titleText = new PIXI.Text(name,
             {
                 fontFamily : 'Courier New',
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: 'bold',
                 fill: this.color.complement
             }
@@ -325,7 +325,7 @@ class Game {
         let exitText = new PIXI.Text("EXIT",
             {
                 fontFamily : 'Courier New',
-                fontSize: 24,
+                fontSize: 22,
                 fontWeight: 'bold',
                 fill: this.color.complement
             }
@@ -350,7 +350,7 @@ class Game {
     }
 
     updateScore() {
-        this.elements.score.setText("SCORE " + this.hits + "/" + this.passedBeats);
+        this.elements.score.setText("SCORE\n" + this.hits + "/" + this.passedBeats);
     }
 
     isPlayerColliding() {
@@ -378,7 +378,7 @@ class Game {
             this.updateScore()
             this.app.stage.removeChild(this.obstacles[index]);
             this.obstacles.splice(index, 1);
-            this.elements.player.y = this.app.renderer.height - this.playerRadius * 3
+            this.elements.player.y = this.app.renderer.height - this.playerRadius * 2.5
             this.elements.player.rotation -= 0.3
             this.elements.player.tint = 0x00FF00;
             this.elements.score.style.fill = 0x00FF00;
