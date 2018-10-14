@@ -7,6 +7,7 @@
 var access_token, device_id; // Device id used for playback SDK
 $('#loggedIn').hide();
 $('#loggedOut').hide();
+$('#searchResults').hide();
 
 $('#login').click(function() {
   // Call the authorize endpoint, which will return an authorize URL, then redirect to that URL
@@ -75,6 +76,8 @@ input.addEventListener("keyup", function(event) {
 });
 
 function search() {
+  $('#searchResults').fadeOut(500);
+  $('#logoLoggedIn').fadeOut(200);
   $('#searchBox').animate({top: '150px'}, 300, function () {
     var input = $('#search').val();
     $.get({url: '/search', headers: {"Authorization": `Bearer ${access_token}`}, data: {input: input}}, function(data) {
@@ -86,13 +89,26 @@ function search() {
 
       // "Data" is the array of track objects we get from the API. See server.js for the function that returns it.
       data.tracks.items.forEach(function(track) {
-        //var card = $('')
-        var trackName = $('<li><a href="#">' + track.name + '</a></li>');
-        trackName.on('click', function() {
+        var card = $('<div></div>');
+        card.addClass("card");
+        card.on('click', function() {
           window.location.href = `/game/#track_id=${track.id}`;
         });
-        trackName.appendTo('#searchResults');
+
+        var cover = $('<img>');
+        cover.attr("src", track.album.images[0].url);
+        cover.attr("width", "200px");
+        cover.css("border-radius", "30px 30px 0 0");
+        cover.appendTo(card);
+
+        var trackName = $('<h5 style="font-size: 20px;">' + track.name + '</h5>');
+        trackName.appendTo(card);
+
+        var trackArtist = $('<h4>' + track.artists[0].name + '</h4>');
+        trackArtist.appendTo(card);
+        card.appendTo('#searchResults');
       });
+      $('#searchResults').fadeIn(500);
       console.log(data);
     });
   });
@@ -104,3 +120,25 @@ function search() {
     console.log('callback - particles.js config loaded');
   });
 }());
+
+if(window.innerWidth < 800) {
+    $('#searchBox').css("width", "80%");
+}
+if(window.innerWidth < 500) {
+  $('#search').attr("placeholder", "Search");
+}
+$(window).resize(function(){
+  var w = window.innerWidth;
+    if(w < 800) {
+        $('#searchBox').css("width", "80%");
+    }
+    if(w >= 800) {
+        $('#searchBox').css("width", "50%");
+    }
+    if (w < 500) {
+      $('#search').attr("placeholder", "Search");
+    }
+    if (w >= 500) {
+      $('#search').attr("placeholder", "Dancing Queen, God's Plan...");
+    }
+});

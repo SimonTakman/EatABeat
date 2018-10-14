@@ -21,7 +21,6 @@ header {
   top: 0;
   right: 0;
   padding: 20px 40px 20px 40px;
-  text-align: right;
 }
 
 div#pause {
@@ -49,9 +48,12 @@ main {
 }
 
 #logoLoggedIn {
-  margin: 0 auto;
-  width: 40px;
-  text-align: center;
+  width: 80px;
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
 }
 
 .btn-primary {
@@ -80,14 +82,16 @@ main {
 #searchBox {
   width: 50%;
   position: absolute;
-  top: 50%;
+  top: 400px;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
 }
 
 .input-group {
   text-align: left;
+  background-color: #29977F;
+  border-radius: 500px;
 }
 
 .input-group-addon {
@@ -118,7 +122,7 @@ main {
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #FFC858;
-    opacity: 1; /* Firefox */
+    opacity: 0.5; /* Firefox */
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
@@ -129,10 +133,22 @@ main {
     color: #FFC858;
 }
 
+.card {
+  background-color: #29977F;
+  color: #FFC858;
+  width: 200px;
+  border-radius: 30px;
+  margin: 20px;
+  cursor: pointer;
+}
+
 #searchResults {
   position: absolute;
-  top: 50%;
+  top: 250px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
 }

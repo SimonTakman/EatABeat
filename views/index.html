@@ -15,25 +15,26 @@
   </head>
   <body>
 
-    <div id="content" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden;">
+    <div id="content" style="position:absolute; top: 0; right: 0; bottom: 0; left: 0;">
       <div id="loggedOut">
         <img src="/assets/Spoti_DarkGreen.svg" width="50px" id="logoLoggedOut">
-        <h2>Bangarang</h2>
-        <p>Catch the flying items with your favourite song!</p>
+        <h2>Eat A Beat!</h2>
+        <p>Eat the flying beats of your favourite song!</p>
         <button class="btn btn-primary" id="login">Log in</button>
       </div>
 
       <div id="loggedIn">
         <header>
-          <div id="userInfo" style="position: absolute;">
+          <div id="userInfo" style="position: absolute; margin-top: 5px;">
             <img id="avatar">
             <h4 id="displayName" style="float:left; margin: 10px 0 0 10px;"></h4>
           </div>
-          <img src="/assets/Spoti_DarkGreen.svg" id="logoLoggedIn">
           <div style="">
-            <a href="/logout" class="btn btn-link" id="logout" style="color: #29977F;">Log out</a>
+            <a href="/logout" class="btn btn-link pull-right" id="logout" style="color: #29977F;">Log out</a>
           </div>
         </header>
+
+        <img src="/assets/Spoti_DarkGreen.svg" id="logoLoggedIn">
 
         <div id="searchBox">
           <div class="input-group">
