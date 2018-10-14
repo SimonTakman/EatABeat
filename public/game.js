@@ -36,7 +36,7 @@ class Game {
         this.addScore();
         this.addExit();
         this.addOuch();
-        this.addTitle();
+        //this.addTitle();
         this.app.ticker.add((delta) => this.onTickEvent(delta));
 
         // Mouse move to move player
@@ -88,6 +88,7 @@ class Game {
         let beats = this.track.analysis.beats;
         let bars = this.track.analysis.bars;
         var duration = this.getDuration();
+        let windowHeight = this.app.renderer.height;
 
         // Update obstacles
         this.obstacles.forEach((o, index) => {
@@ -99,7 +100,7 @@ class Game {
                 this.obstacles.splice(index, 1);
                 this.updateScore();
 
-                if (this.obstacles.length == 0 && this.status.barIndex == bars.length - 1) {
+                if (this.obstacles.length == 0 && this.status.barIndex == beats.length - 1) {
                     // Game ended
                     console.log("End of game");
                     this.onGameEnd();
@@ -418,7 +419,7 @@ class Game {
         this.app.renderer.resize(parent.clientWidth, parent.clientHeight);
         this.elements.player.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
         this.elements.exit.position.set(this.app.renderer.width - 80, 20);
-        this.elements.titleText.position.set(window.innerWidth / 2 - this.elements.titleText.width / 2, 20);
+        //this.elements.titleText.position.set(window.innerWidth / 2 - this.elements.titleText.width / 2, 20);
         this.elements.ouch.position.set(this.app.renderer.width / 2 - 50, this.app.renderer.height / 2);
         console.log("Using width: ", this.app.renderer.width, " and height: ", this.app.renderer.height);
     }
@@ -436,6 +437,7 @@ if(track && accessToken){
     play(Cookies.get('track_id'))
     .then(() => {
         game.start();
+        gameViewElement.style.opacity = 1;
     })
     .catch(() => console.log("NOO"));
   })

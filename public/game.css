@@ -28,4 +28,5 @@ main {
   height: 100%;
   position: absolute;
   overflow: hidden;
+  transition:opacity 1000ms;
 }
