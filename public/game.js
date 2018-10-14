@@ -13,7 +13,6 @@ class Game {
         this.windowWidth = 0;
         this.elements = {};
         this.obstacles = [];
-        this.score = 0;
         this.hits = 0;
         this.passedBeats = 0;
         this.lastCollision = null;
@@ -54,12 +53,13 @@ class Game {
     }
 
     onGameEnd() {
-        this.score += this.hits / this.track.analysis.beats.length * 100;
-        this.hits = 0;
-        this.updateScore();
-
-        // TODO: Temp, start over
-        this.reset();
+        this.app.stop();
+        this.elements.score.style.fontSize = 50;
+        this.elements.score.style.align = 'center';
+        this.elements.score.setText("Good job!\n" + this.hits + "/" + this.passedBeats);
+        let x = this.app.renderer.width / 2 - this.elements.score.width / 2;
+        let y = this.app.renderer.height / 2 - this.elements.score.height / 2;
+        this.elements.score.position.set(x, y);
     }
 
     start() {
