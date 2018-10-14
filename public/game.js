@@ -307,7 +307,7 @@ class Game {
                 fontFamily : 'Visitor',
                 fontSize: 30,
                 //fontWeight: 'bold',
-                fill: 0x00FF00
+                fill: 0x33CC33
             }
         );
         ouchText.visible = false;
@@ -398,8 +398,8 @@ class Game {
             this.obstacles.splice(index, 1);
             this.elements.player.y = this.app.renderer.height - this.playerRadius * 2.5
             this.elements.player.rotation -= 0.3
-            this.elements.player.tint = 0x00FF00;
-            this.elements.score.style.fill = 0x00FF00;
+            this.elements.player.tint = 0x33CC33;
+            this.elements.score.style.fill = 0x33CC33;
             this.elements.ouch.visible = true;
         } else if(this.elements.ouch.visible && !this.isDamaging) {
             setTimeout(() => {
