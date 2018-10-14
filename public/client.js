@@ -6,12 +6,7 @@
 
 $(function() {
   $('body').hide();
-  var access_token, track_id, device_id; // Device id used for playback SDK
-
-  $('#logout').click(function() {
-    Cookies.remove('access_token');
-    window.location.href = '/';
-  });
+  var access_token, track_id;
 
   const hash = window.location.hash
     .substring(1)

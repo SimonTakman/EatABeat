@@ -91,7 +91,9 @@ function search() {
         var card = $('<div></div>');
         card.addClass("card");
         card.on('click', function() {
-          window.location.href = `/game/#track_id=${track.id}`;
+          $('body').fadeOut(500, function() {
+            window.location.href = `/game/#track_id=${track.id}`;
+          });
         });
 
         var cover = $('<img>');
