@@ -311,7 +311,7 @@ class Game {
             }
         );
         ouchText.visible = false;
-        ouchText.x = this.app.renderer.width / 2 - 50;
+        ouchText.x = this.app.renderer.width / 2 - ouchText.width / 2;
         ouchText.y = this.app.renderer.height / 2;
         this.app.stage.addChild(ouchText);
         this.elements.ouch = ouchText;
