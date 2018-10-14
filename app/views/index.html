@@ -15,15 +15,32 @@
   </head>
   <body>
 
-    <div id="content">
+    <div id="content" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden;">
       <div id="loggedOut">
+        <img src="/assets/Spoti_DarkGreen.svg" width="50px" id="logoLoggedOut">
+        <h2>Bangarang</h2>
+        <p>Catch the flying items with your favourite song!</p>
         <button class="btn btn-primary" id="login">Log in</button>
       </div>
 
       <div id="loggedIn">
-        <a href="/logout" class="btn btn-secondary" id="logout">Log out</a>
-        <input id="search" type="search" placeholder="Search for tracks">
-        <button class="btn btn-primary" id="searchBtn" onClick="search();">SEARCH</button>
+        <header>
+          <div id="userInfo" style="position: absolute;">
+            <img id="avatar">
+            <h4 id="displayName" style="float:left; margin: 10px 0 0 10px;"></h4>
+          </div>
+          <img src="/assets/Spoti_DarkGreen.svg" id="logoLoggedIn">
+          <div style="">
+            <a href="/logout" class="btn btn-link" id="logout" style="color: #29977F;">Log out</a>
+          </div>
+        </header>
+
+        <div id="searchBox">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search" style="color: #FFC858;"></i></span>
+            <input id="search" type="search" placeholder="Dancing Queen, God's Plan...">
+          </div>
+        </div>
 
         <div id="searchResults">
 
@@ -38,6 +55,7 @@
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="/particles.js"></script>
     <script src="/indexPage.js"></script>
 
   </body>

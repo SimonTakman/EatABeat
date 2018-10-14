@@ -9,15 +9,19 @@
 }
 
 body {
+  background-color: #FFC858;
+  color: #29977F;
   text-align: center;
   margin-top: 100px;
 }
 
 header {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px 40px 20px 40px;
+  text-align: right;
 }
 
 div#pause {
@@ -37,18 +41,98 @@ main {
   overflow: hidden;
 }
 
-#search {
-  font-size: 16px;
+#logoLoggedOut {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+}
+
+#logoLoggedIn {
+  margin: 0 auto;
+  width: 40px;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #29977F;
+  color: #FFC858;
+}
+
+.btn-primary:hover {
+  background-color: #53AA97;
+  color: #FFC858;
+}
+
+#loggedOut {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#loggedIn {
+
+}
+
+#searchBox {
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.input-group {
+  text-align: left;
+}
+
+.input-group-addon {
+  font-size: 20px;
   font-weight: 500;
   text-decoration: none;
-  padding: 12px 20px;
-  border-radius: 500px;
+  padding-left: 28px;
+  padding-right: 0px;
   border: 0px;
-  background-color: #eee;
-  width: 400px;
+  background-color: #29977F;
   outline: none;
 }
 
+#search {
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 16px 28px;
+  border-radius: 500px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border: 0px;
+  background-color: #29977F;
+  color: #FFC858;
+  width: 100%;
+  outline: none;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #FFC858;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #FFC858;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #FFC858;
+}
+
 #searchResults {
-  margin-top: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }

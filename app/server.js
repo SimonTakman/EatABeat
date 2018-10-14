@@ -66,7 +66,7 @@ app.get('/search', function (request, response) {
 
   let query = 'track:' + request.query.input;
 
-  loggedInSpotifyApi.searchTracks(query)
+  loggedInSpotifyApi.searchTracks(query, { limit : 5 })
   .then(function(data) {
     response.send(data.body);
   }, function(err) {
