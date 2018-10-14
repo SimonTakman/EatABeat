@@ -372,10 +372,11 @@ class Game {
     }
 
     isPlayerColliding() {
-        var playerX = this.elements.player.x;
-        var playerY = this.elements.player.y;
-        var playerWidth = this.playerRadius * 2;
-        var playerHeight = this.playerRadius * 2;
+        var pb = this.elements.player.getBounds();
+        var playerX = pb.x;
+        var playerY = pb.y;
+        var playerWidth = pb.width;
+        var playerHeight = pb.height;
         for (var i = 0; i < this.obstacles.length; i++) {
             var ob = this.obstacles[i].getBounds();
             var isColiding = ob.x + ob.width > playerX &&
