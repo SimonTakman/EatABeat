@@ -49,10 +49,12 @@ if (access_token) {
   // Get logged in user info
   $.get({url: '/me', headers: {"Authorization": `Bearer ${access_token}`}}, function(data) {
     // "Data" is the array of track objects we get from the API. See server.js for the function that returns it.
-    $('#avatar').attr("src", data.images[0].url);
-    $('#avatar').attr("width", "40px");
-    $('#avatar').css("border-radius", "50%");
-    $('#avatar').css("float", "left");
+    if (data.images[0].url) {
+      $('#avatar').attr("src", data.images[0].url);
+      $('#avatar').attr("width", "40px");
+      $('#avatar').css("border-radius", "50%");
+      $('#avatar').css("float", "left");
+    }
     $('#displayName').text(data.display_name);
     console.log(data);
   });
@@ -79,10 +81,12 @@ function search() {
 
       /* Build search results */
       $('#searchResults').empty();
-      var results = $('<h3>Results for: ' + input + ' (' + data.tracks.items.length + ' out of ' + data.tracks.total + ')</h3>');
-      results.appendTo('#searchResults');
+      //var results = $('<h3>Results for: ' + input + ' (' + data.tracks.items.length + ' out of ' + data.tracks.total + ')</h3>');
+      //results.appendTo('#searchResults');
+
       // "Data" is the array of track objects we get from the API. See server.js for the function that returns it.
       data.tracks.items.forEach(function(track) {
+        //var card = $('')
         var trackName = $('<li><a href="#">' + track.name + '</a></li>');
         trackName.on('click', function() {
           window.location.href = `/game/#track_id=${track.id}`;
