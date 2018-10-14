@@ -53,6 +53,11 @@ class Game {
     }
 
     onGameEnd() {
+        this.elements.player.rotation = 0
+        this.elements.player.y = this.app.renderer.height - this.playerRadius * 2
+        this.elements.score.style.fill = this.color.complement;
+        this.elements.player.tint = this.color.complement;
+        this.elements.ouch.visible = false;
         this.app.stop();
         this.elements.score.style.fontSize = 50;
         this.elements.score.style.align = 'center';
@@ -96,12 +101,6 @@ class Game {
                 this.app.stage.removeChild(o);
                 this.obstacles.splice(index, 1);
                 this.updateScore();
-
-                if (this.obstacles.length == 0 && this.status.barIndex == beats.length - 1) {
-                    // Game ended
-                    console.log("End of game");
-                    this.onGameEnd();
-                }
             }
         });
 
@@ -134,6 +133,12 @@ class Game {
             var factor = beats[newBarIndex].confidence;
             var radius = Math.max(factor * (this.windowWidth / 7), 15);
             this.addObstacle(radius, avgPitch, sectionIndex % 2);
+        }
+
+        if (this.obstacles.length == 0 && this.status.barIndex == beats.length - 1) {
+            // Game ended
+            console.log("End of game");
+            this.onGameEnd();
         }
     }
 
@@ -291,7 +296,7 @@ class Game {
             }
         );
         scoreText.x = this.app.renderer.width - scoreText.width - 20;
-        scoreText.y = 20;
+        scoreText.y = 25;
         this.app.stage.addChild(scoreText);
         this.elements.score = scoreText;
         this.updateScore();
@@ -326,7 +331,7 @@ class Game {
             }
         );
         titleText.x = window.innerWidth / 2 - titleText.width / 2;
-        titleText.y = 20;
+        titleText.y = 25;
         this.app.stage.addChild(titleText);
         this.elements.titleText = titleText;
     }
