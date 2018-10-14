@@ -439,18 +439,15 @@ if(track && accessToken){
         game = new Game(gameViewElement, data);
         game.resize();
         play(Cookies.get('track_id'))
-        .then(() => {
-            game.start();
-            gameViewElement.style.opacity = 1;
-        })
         .catch(() => {
             console.log("ERROR");
-            alert("Unsupported platform");
+            alert("Unsupported platform, sorry!");
+        })
+        .then(() => {
+            console.log("GOO");
+            game.start();
+            gameViewElement.style.opacity = 1;
         });
-    },
-    error: function(data) {
-        console.log("ERROR");
-        alert("Unsupported platform");
     }
   });
 }

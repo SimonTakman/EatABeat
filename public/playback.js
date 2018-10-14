@@ -10,7 +10,10 @@ function initPlayback() {
       });
 
       // Error handling
-      player.on('initialization_error', e => console.error(e));
+      player.on('initialization_error', e => {
+        console.error(e);
+        alert("Unsupported platform, sorry!");
+      });
       player.on('authentication_error', e => console.error(e));
       player.on('account_error', e => console.error(e));
       player.on('playback_error', e => console.error(e));
