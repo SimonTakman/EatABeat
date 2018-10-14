@@ -287,14 +287,13 @@ class Game {
 
     addScore() {
         let scoreText = new PIXI.Text("",
-                          {
-                            fontFamily : 'Visitor',
-                            fontSize: 20,
-                            //fontWeight: 'bold',
-                            fill: this.color.complement
-                        }
+            {
+                fontFamily : 'Visitor',
+                fontSize: 28,
+                fill: this.color.complement
+            }
         );
-        scoreText.x = 20;
+        scoreText.x = this.app.renderer.width - scoreText.width - 20;
         scoreText.y = 20;
         this.app.stage.addChild(scoreText);
         this.elements.score = scoreText;
@@ -304,10 +303,8 @@ class Game {
     addOuch() {
         let ouchText = new PIXI.Text("YUM!",
             {
-                //TODO: Add Font
                 fontFamily : 'Visitor',
                 fontSize: 30,
-                //fontWeight: 'bold',
                 fill: 0x33CC33
             }
         );
@@ -341,12 +338,12 @@ class Game {
         let exitText = new PIXI.Text("EXIT",
             {
                 fontFamily : 'Visitor',
-                fontSize: 24,
+                fontSize: 28,
                 //fontWeight: 'bold',
                 fill: this.color.complement
             }
         );
-        exitText.x = this.app.renderer.width - 80;
+        exitText.x = 20;
         exitText.y = 20;
         exitText.interactive = true;
         exitText.buttonMode = true;
@@ -418,7 +415,7 @@ class Game {
         this.windowWidth = parent.clientWidth;
         this.app.renderer.resize(parent.clientWidth, parent.clientHeight);
         this.elements.player.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
-        this.elements.exit.position.set(this.app.renderer.width - 80, 20);
+        this.elements.score.position.set(this.app.renderer.width - this.elements.score.width - 20, 20);
         //this.elements.titleText.position.set(window.innerWidth / 2 - this.elements.titleText.width / 2, 20);
         this.elements.ouch.position.set(this.app.renderer.width / 2 - 50, this.app.renderer.height / 2);
         console.log("Using width: ", this.app.renderer.width, " and height: ", this.app.renderer.height);
