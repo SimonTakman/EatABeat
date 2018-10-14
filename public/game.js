@@ -356,12 +356,13 @@ class Game {
 
     addObstacle(radius, xPosition, type) {
         var xLimit = this.app.renderer.width;
+        var x = Math.max(Math.min(xLimit * xPosition, xLimit - radius), radius);
         var graphics = new PIXI.Graphics();
         graphics.beginFill(this.color.complement, 1);
         if (type == 1)
-            graphics.drawCircle(xLimit * xPosition, -radius, radius);
+            graphics.drawCircle(x, -radius, radius);
         else
-            graphics.drawRoundedRect(xLimit * xPosition, -radius, radius * 2, radius * 2, radius / 2);
+            graphics.drawRoundedRect(x, -radius, radius * 2, radius * 2, radius / 2);
 
         this.app.stage.addChild(graphics);
         this.obstacles.push(graphics);
