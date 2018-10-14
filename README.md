@@ -1,27 +1,25 @@
-# FUN NAME FOR A GAME HERE
-desc...
+# Eat A Beat
+A 2D game generated from a song, powered by Spotify. 
 
 ## Game design
+Summary of game features:
+* Song tempo decides the speed of the obstacles
+* Obstacles are spawned for each beat
+* The average pitch of a beat decides the position of the obstacle
+* The confidence of the beat decides the size of the obstacle
 
-Features: dancability, energy, loudness, speechiness, acousticness, instrumentalness, liveness, and valence.
-
-Analysis: sections, bars, beats, tatums, and segments.
-
-### Summary
-* Sections changes background color through gradient.
-* Bars decide spawning of obstacles
-* Beats decides speed of environment (i.e speed of obstacles)
-* Valence decides the brightness of the environment (happiness)
-* 
-
-### Design
-TODO: Mockups etc
+## Design
+TODO: Screenshots
 
 ## Backend
-Node.js using express hosting.
+Developed using node.js with the following technologies:
+* Express
+* Spotify Web API
 
 ## Frontend
-Game engine through [Pixie.js](https://github.com/pixijs/pixi.js)
-
-## Pixi Particles ##
-https://github.com/pixijs/pixi-particles
+Developed using the following technologies:
+* JQuery
+* [Pixie.js](https://github.com/pixijs/pixi.js)
+* Spotify Player
+* [Cookie.js](https://github.com/js-cookie/js-cookie)
+* [Pixi Particles](https://github.com/pixijs/pixi-particles)
