@@ -62,12 +62,10 @@ class Game {
     }
 
     start() {
-        this.startTime = (new Date()).getTime();
         this.app.start();
     }
 
     reset() {
-        this.startTime = (new Date()).getTime();
         this.status.beatIndex = 0;
         this.status.barIndex = -1;
 
@@ -81,7 +79,7 @@ class Game {
     }
 
     getDuration() {
-        return ((new Date()).getTime() - this.startTime) / 1000;
+        return ((new Date()).getTime() - window.startTime) / 1000;
     }
 
     onTickEvent(delta) {
@@ -363,7 +361,6 @@ if(track && accessToken){
     game.resize();
     play(Cookies.get('track_id'))
     .then(() => {
-        console.log("GOOOO");
         game.start();
     })
     .catch(() => console.log("NOO"));

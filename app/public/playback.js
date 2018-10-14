@@ -10,20 +10,23 @@ function initPlayback() {
       });
 
       // Error handling
-    player.on('initialization_error', e => console.error(e));
-    player.on('authentication_error', e => console.error(e));
-    player.on('account_error', e => console.error(e));
-    player.on('playback_error', e => console.error(e));
+      player.on('initialization_error', e => console.error(e));
+      player.on('authentication_error', e => console.error(e));
+      player.on('account_error', e => console.error(e));
+      player.on('playback_error', e => console.error(e));
 
-    // Playback status updates
-    player.on('player_state_changed', state => {
-      $('#current-track').attr('src', state.track_window.current_track.album.images[0].url);
-      $('#current-track-name').text(state.track_window.current_track.name);
-    });
+      // Playback status updates
+      player.on('player_state_changed', state => {
+        console.log("STATE CHANGED", state);
+        if (state.position == 0 && state.paused == false) {
+          window.startTime = (new Date()).getTime();
+          console.log("NEW START TIME");
+        }
+      });
 
-    // Connect to the player!
-    player.connect();
-    };
+      // Connect to the player!
+      player.connect();
+    }
   }
 }
 
@@ -43,8 +46,8 @@ function play(track_id) {
           data: '{"uris": ["spotify:track:' + track_id +'"]}',
           beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + token );},
           success: function(data) {
-            console.log("Play data", data);
             resolve();
+
           }
         });
       }
