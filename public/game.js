@@ -344,7 +344,7 @@ class Game {
         exitText.y = 20;
         exitText.interactive = true;
         exitText.buttonMode = true;
-        exitText.on("click", () => window.location.pathname = "");
+        exitText.on("pointerdown", () => window.location.pathname = "");
         this.app.stage.addChild(exitText);
         this.elements.exit = exitText;
     }
