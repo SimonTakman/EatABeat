@@ -421,7 +421,7 @@ class Game {
         this.elements.player.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
         this.elements.score.position.set(this.app.renderer.width - this.elements.score.width - 20, 20);
         //this.elements.titleText.position.set(window.innerWidth / 2 - this.elements.titleText.width / 2, 20);
-        this.elements.ouch.position.set(this.app.renderer.width / 2 - 50, this.app.renderer.height / 2);
+        this.elements.ouch.position.set(this.app.renderer.width / 2 - this.elements.ouch.width / 2, this.app.renderer.height / 2);
         console.log("Using width: ", this.app.renderer.width, " and height: ", this.app.renderer.height);
     }
 }
