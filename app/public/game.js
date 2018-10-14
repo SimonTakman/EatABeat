@@ -23,6 +23,7 @@ class Game {
         };
         this.playerRadius = 18;
         this.isDamaging = false;
+        this.lastAveragePitch = 0;
 
         // Clear container
         while (container.firstChild) {
@@ -120,9 +121,20 @@ class Game {
 
         if (newBarIndex != this.status.barIndex) {
             this.status.barIndex = newBarIndex;
+
+            // Get average pitches
+            let avgPitch = beats[newBarIndex].averagePitch;
+            let nPitches = beats[newBarIndex].numberOfPitches;
+
+            if (avgPitch == 0)
+                avgPitch = this.lastAveragePitch;
+            else
+                this.lastAveragePitch = avgPitch;
+
+            // Spawning new obstacle
             var factor = beats[newBarIndex].confidence;
             var radius = factor * (this.windowWidth / 5) + 2;
-            this.addObstacle(radius, Math.random());
+            this.addObstacle(radius, avgPitch);
         }
     }
 
@@ -135,7 +147,51 @@ class Game {
         let tempo = Math.max(Math.min(this.track.features.tempo, maxTempo), minTempo)
         let tempoScaled = (tempo - minTempo) / (maxTempo - minTempo);
         this.speed = tempoScaled * 5 + 5;
-        //this.track.analysis.bars = [this.track.analysis.bars[0], this.track.analysis.bars[1]];
+
+        // Process segments of each beat to get an average pitch
+        let beats = this.track.analysis.beats;
+        let segments = this.track.analysis.segments;
+        console.log("Number of beats", beats.length, " and segments ", segments.length);
+        for (var x = 0; x < beats.length; x++) {
+            let beatStart = beats[x].start;
+            let beatEnd = beatStart + beats[x].duration;
+            let avgPitch = 0;
+            let nPitches = 0;
+            for (var i = 0; i < segments.length; i++) {
+                let segStart = segments[i].start;
+                let segEnd = segStart + segments[i].duration;
+                if (segStart >= beatStart) {
+                    if (segEnd < beatEnd) {
+                        for (var j = 0; j < segments[i].pitches.length; j++) {
+                            avgPitch += segments[i].pitches[j];
+                            nPitches += 1;
+                        }
+                    } else {
+                        break; // passed beat
+                    }
+                }
+            }
+            if (nPitches != 0)
+                avgPitch /= nPitches;
+            beats[x].averagePitch = avgPitch;
+            beats[x].numberOfPitches = nPitches;
+        }
+        // Normalize the average pitch
+        let minPitch = 1;
+        let maxPitch = 0;
+        for (var x = 0; x < beats.length; x++) {
+            if (beats[x].numberOfPitches == 0 && x > 0) {
+                beats[x].numberOfPitches = beats[x-1].numberOfPitches;
+                beats[x].averagePitch = beats[x-1].averagePitch;
+            }
+            if (beats[x].averagePitch > maxPitch)
+                maxPitch = beats[x].averagePitch;
+            else if (beats[x].averagePitch < minPitch)
+                minPitch = beats[x].averagePitch
+        }
+        for (var x = 0; x < beats.length; x++) {
+            beats[x].averagePitch = (beats[x].averagePitch - minPitch) / (maxPitch - minPitch);
+        }
     }
 
     lightenColor(colorCode, amount) {
