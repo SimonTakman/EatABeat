@@ -12,7 +12,7 @@ function initPlayback() {
       // Error handling
       player.on('initialization_error', e => {
         console.error(e);
-        alert("Unsupported platform, sorry!");
+        alert("This game only works on Android or on a computer, sorry!");
       });
       player.on('authentication_error', e => console.error(e));
       player.on('account_error', e => console.error(e));

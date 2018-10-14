@@ -441,7 +441,7 @@ if(track && accessToken){
         play(Cookies.get('track_id'))
         .catch(() => {
             console.log("ERROR");
-            alert("Unsupported platform, sorry!");
+            alert("This game only works on Android or on a computer, sorry!");
         })
         .then(() => {
             console.log("GOO");
