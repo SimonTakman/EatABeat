@@ -125,6 +125,7 @@ class Game {
             // Get average pitches
             let avgPitch = beats[newBarIndex].averagePitch;
             let nPitches = beats[newBarIndex].numberOfPitches;
+            let sectionIndex = beats[newBarIndex].sectionIndex;
 
             if (avgPitch == 0)
                 avgPitch = this.lastAveragePitch;
@@ -134,7 +135,7 @@ class Game {
             // Spawning new obstacle
             var factor = beats[newBarIndex].confidence;
             var radius = Math.max(factor * (this.windowWidth / 7), 15);
-            this.addObstacle(radius, avgPitch);
+            this.addObstacle(radius, avgPitch, sectionIndex % 2);
         }
     }
 
@@ -191,6 +192,19 @@ class Game {
         }
         for (var x = 0; x < beats.length; x++) {
             beats[x].averagePitch = (beats[x].averagePitch - minPitch) / (maxPitch - minPitch);
+        }
+
+        // Set current section
+        let sections = this.track.analysis.sections;
+        for (var x = 0; x < beats.length; x++) {
+            let beatStart = beats[x].start;
+            for (var i = 0; i < sections.length; i++) {
+                let secStart = sections[i].start;
+                if (secStart >= beatStart) {
+                    beats[x].sectionIndex = i;
+                    break;
+                }
+            }
         }
     }
 
@@ -340,11 +354,14 @@ class Game {
         this.elements.exit = exitText;
     }
 
-    addObstacle(radius, xPosition) {
+    addObstacle(radius, xPosition, type) {
         var xLimit = this.app.renderer.width;
         var graphics = new PIXI.Graphics();
         graphics.beginFill(this.color.complement, 1);
-        graphics.drawCircle(xLimit * xPosition, -radius, radius);
+        if (type == 1)
+            graphics.drawCircle(xLimit * xPosition, -radius, radius);
+        else
+            graphics.drawRoundedRect(xLimit * xPosition, -radius, radius * 2, radius * 2, radius / 2);
 
         this.app.stage.addChild(graphics);
         this.obstacles.push(graphics);
