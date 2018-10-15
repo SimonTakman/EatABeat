@@ -18,14 +18,14 @@
 
     <div id="particles" style="position:fixed; top: 0; right: 0; bottom: 0; left: 0;"></div>
     <div id="content">
-      <div id="loggedOut">
+      <div id="loggedOut" hidden>
         <img src="/assets/Spoti_DarkGreen.svg" width="50px" id="logoLoggedOut">
         <h2>Eat A Beat!</h2>
         <p>Eat the flying beats of your favourite song!</p>
         <button class="btn btn-primary" id="login">Log in</button>
       </div>
 
-      <div id="loggedIn">
+      <div id="loggedIn" hidden>
         <header>
           <div id="userInfo" style="position: absolute; margin-top: 5px;">
             <img id="avatar">
@@ -36,17 +36,25 @@
           </div>
         </header>
 
-        <img src="/assets/Spoti_DarkGreen.svg" id="logoLoggedIn">
+        <div id="searchContent">
+          <img src="/assets/Spoti_DarkGreen.svg" id="logoLoggedIn">
 
-        <div id="searchBox">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search" style="color: #FFC858;"></i></span>
-            <input id="search" type="search" placeholder="Dancing Queen, God's Plan...">
+          <div id="searchBox">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-search" style="color: #FFC858;"></i></span>
+              <input id="search" type="search" placeholder="Levels, American Idiot...">
+            </div>
+          </div>
+
+          <div id="searchResults">
+
           </div>
         </div>
 
-        <div id="searchResults">
-
+        <div id="connect">
+          <h3>You seem to be listening to a song already. Want to play that song?</h3>
+          <button class="btn btn-primary" id="connectStart">Start</button>
+          <button class="btn btn-secondary" id="connectSearch">Search</button>
         </div>
       </div>
     </div>

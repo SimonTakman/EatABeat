@@ -29,3 +29,29 @@ main {
   position: absolute;
   overflow: hidden;
 }
+
+.btn-primary {
+  background-color: #29977F;
+  color: #FFC858;
+}
+
+.btn-primary:hover {
+  background-color: #53AA97;
+  color: #FFC858;
+}
+
+.btn-primary:active {
+  background-color: #29977F;
+  color: #FFC858;
+}
+
+#devices {
+  background-color: #FFC858;
+  color: #29977F;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}

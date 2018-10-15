@@ -15,8 +15,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.7.1/pixi.min.js"></script>
   </head>
   <body>
-    <main id="game-view" style="background-color: #FFC858;">
+    <main id="game-view" style="background-color: #FFC858;" hidden>
     </main>
+
+    <div id="devices" hidden>
+      <div id="startSpotify" hidden>
+        <h3>Start Spotify on any device before continuing.</h3>
+        <button class="btn btn-primary" onClick="refreshPage()">Continue</button>
+      </div>
+      <div id="chooseDevice" hidden>
+        <h3>Choose a device to play on.</h3>
+        <div id="deviceList"></div>
+      </div>
+    </div>
 
     <!-- Your web-app is https, so your scripts need to be too -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"

@@ -27,7 +27,7 @@ var SpotifyWebApi = require('spotify-web-api-node');
 // Replace with your redirect URI, required scopes, and show_dialog preference
 var isProd = process.env.NODE_ENV == "production";
 var redirectUri = (isProd ? 'https://eatabeat.herokuapp.com' : 'http://localhost:3000') + "/callback";
-var scopes = ["streaming", "user-read-birthdate", "user-read-email", "user-read-private", "user-modify-playback-state"];
+var scopes = ["streaming", "user-read-birthdate", "user-read-email", "user-read-private", "user-modify-playback-state", "user-read-playback-state"];
 var showDialog = true;
 
 // The API object we'll use to interact with the API
@@ -111,6 +111,48 @@ app.get('/me', function(request, response) {
   loggedInSpotifyApi.getMe()
     .then(function(data) {
       response.send(data.body);
+    }, function(err) {
+      console.log('Something went wrong!', err);
+    });
+});
+
+app.get('/playbackState', function(request, response) {
+  var loggedInSpotifyApi = new SpotifyWebApi();
+  loggedInSpotifyApi.setAccessToken(request.headers['authorization'].split(' ')[1]);
+  // Get information about current playing song for signed in user
+  loggedInSpotifyApi.getMyCurrentPlaybackState()
+    .then(function(data) {
+      // Output items
+      response.send(data.body);
+      //console.log("Now Playing: ",data.body);
+    }, function(err) {
+      console.log('Something went wrong!', err);
+    });
+});
+
+app.get('/devices', function(request, response) {
+  var loggedInSpotifyApi = new SpotifyWebApi();
+  loggedInSpotifyApi.setAccessToken(request.headers['authorization'].split(' ')[1]);
+  // Get information about current playing song for signed in user
+  loggedInSpotifyApi.getMyDevices()
+    .then(function(data) {
+      // Output items
+      response.send(data.body);
+      //console.log("Now Playing: ",data.body);
+    }, function(err) {
+      console.log('Something went wrong!', err);
+    });
+});
+
+app.get('/pause', function(request, response) {
+  var loggedInSpotifyApi = new SpotifyWebApi();
+  loggedInSpotifyApi.setAccessToken(request.headers['authorization'].split(' ')[1]);
+
+  loggedInSpotifyApi.pause()
+    .then(function(data) {
+      // Output items
+      //response.send(data.body);
+      //console.log("Now Playing: ",data.body);
     }, function(err) {
       console.log('Something went wrong!', err);
     });

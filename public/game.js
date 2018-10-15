@@ -64,6 +64,17 @@ class Game {
 
     start() {
         this.app.start();
+        // Before window is closed
+        window.onbeforeunload = function(){
+          $.ajax({
+            url: "https://api.spotify.com/v1/me/player/pause",
+            type: "PUT",
+            beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + Cookies.get('access_token') );},
+            success: function(data) {
+              Cookies.remove("track_id");
+            }
+          });
+        }
     }
 
     reset() {
@@ -335,7 +346,18 @@ class Game {
         exitText.y = 20;
         exitText.interactive = true;
         exitText.buttonMode = true;
-        exitText.on("click", () => window.location.pathname = "");
+        exitText.on("click", () => {
+          // Pause song and then quit
+          $.ajax({
+            url: "https://api.spotify.com/v1/me/player/pause",
+            type: "PUT",
+            beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + Cookies.get('access_token') );},
+            success: function(data) {
+              Cookies.remove("track_id");
+              window.location.pathname = "";
+            }
+          });
+        });
         this.app.stage.addChild(exitText);
         this.elements.exit = exitText;
     }
@@ -412,15 +434,19 @@ console.log("track")
 let game;
 let accessToken = Cookies.get("access_token")
 if(track && accessToken){
-  initPlayback();
+  //initPlayback();
   $.get({url: '/trackInfo', headers:{"Authorization": `Bearer ${accessToken}`}, data: {track_id: track}}, function(data){
     game = new Game(gameViewElement, data);
     game.resize();
-    play(Cookies.get('track_id'))
+    play(Cookies.get('track_id'), Cookies.get('ext_device_id'))
     .then(() => {
         game.start();
     })
-    .catch(() => console.log("NOO"));
+    .catch(() => {
+      console.log("NOO");
+      Cookies.remove("ext_device_id");
+      refreshPage();
+    });
   })
 }
 

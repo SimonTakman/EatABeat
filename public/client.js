@@ -4,8 +4,41 @@
 // by default, you've got jQuery,
 // add other scripts at the bottom of index.html
 
+function refreshPage() {
+  window.location.reload();
+}
+
+function checkDevices() {
+  if (Cookies.get("ext_device_id")) return;
+  $('#game-view').hide();
+  $('#devices').show();
+  access_token = Cookies.get('access_token');
+
+  if (access_token) {
+    $.get({url: '/devices', headers: {"Authorization": `Bearer ${access_token}`}}, function(data) {
+      //console.log(data);
+      if (data.devices.length > 0) {
+        data.devices.forEach(function(device) {
+          var dev = $('<a href="#"><h4>' + device.name + '</h4></a>');
+          dev.on('click', function() {
+            $('#devices').fadeOut(500, function() {
+              Cookies.set("ext_device_id", device.id);
+              refreshPage();
+            });
+          });
+          dev.appendTo('#deviceList');
+        });
+        $('#chooseDevice').fadeIn(500);
+      } else {
+        $('#startSpotify').fadeIn(500);
+      }
+    });
+  } else {
+    window.location.href = '/';
+  }
+}
+
 $(function() {
-  $('body').hide();
   var access_token, track_id;
 
   const hash = window.location.hash
@@ -29,14 +62,8 @@ $(function() {
   if (access_token && track_id) {
     // Logged in
     //console.log("Logged in");
-    $('body').show();
-    // Get logged in user info
-    $.get({url: '/me', headers: {"Authorization": `Bearer ${access_token}`}}, function(data) {
-      // "Data" is the array of track objects we get from the API. See server.js for the function that returns it.
-      console.log(data);
-    });
-    //initPlayback();
-
+    $('#game-view').show();
+    initPlayback();
   }
   else {
     // Not logged in
