@@ -9,24 +9,32 @@ function initPlayback() {
         getOAuthToken: cb => { cb(token); }
       });
 
-      // Error handling
+      // Emitted when the Spotify.Player fails to instantiate
+      // a player capable of playing content in the current environment.
+      // Most likely due to the browser not supporting EME protection.
       player.on('initialization_error', e => {
         //alert("This device is not supported by the Spotify Playback SDK. Please start Spotify and play a song before resuming.");
         console.error(e);
         //window.location.href = '/';
-        checkDevices();
+        checkDevices(); // Play on another device instead of through playback SDK.
       });
+      // Emitted when the Spotify.Player fails
+      // to instantiate a valid Spotify connection
+      // from the access token provided to getOAuthToken.
       player.on('authentication_error', e => {
         console.error(e);
         window.location.href = '/';
       });
+      // Emitted when the user authenticated does not
+      // have a valid Spotify Premium subscription.
       player.on('account_error', e => {
         console.error(e);
-        checkDevices();
+        checkDevices(); // Play on another device instead of through playback SDK.
       });
+      // Emitted when loading and/or playing back a track failed.
       player.on('playback_error', e => {
         console.error(e);
-        checkDevices();
+        checkDevices(); // Play on another device instead of through playback SDK.
       });
 
       // Playback status updates

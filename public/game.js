@@ -36,7 +36,7 @@ class Game {
         this.addScore();
         this.addExit();
         this.addOuch();
-        this.addTitle();
+        //this.addTitle();
         this.app.ticker.add((delta) => this.onTickEvent(delta));
 
         // Mouse move to move player
@@ -53,6 +53,11 @@ class Game {
     }
 
     onGameEnd() {
+        this.elements.player.rotation = 0
+        this.elements.player.y = this.app.renderer.height - this.playerRadius * 2
+        this.elements.score.style.fill = this.color.complement;
+        this.elements.player.tint = this.color.complement;
+        this.elements.ouch.visible = false;
         this.app.stop();
         this.elements.score.style.fontSize = 50;
         this.elements.score.style.align = 'center';
@@ -95,26 +100,18 @@ class Game {
     }
 
     onTickEvent(delta) {
-        let sections = this.track.analysis.sections;
         let beats = this.track.analysis.beats;
-        let bars = this.track.analysis.bars;
         var duration = this.getDuration();
 
         // Update obstacles
         this.obstacles.forEach((o, index) => {
             // Delta is the built in frame-independent transformation
             o.y += 1 * delta  * this.speed;
-            if (o.y > this.app.renderer.height) {
+            if (o.y > this.app.renderer.height + o.height) {
                 this.passedBeats += 1;
                 this.app.stage.removeChild(o);
                 this.obstacles.splice(index, 1);
                 this.updateScore();
-
-                if (this.obstacles.length == 0 && this.status.barIndex == bars.length - 1) {
-                    // Game ended
-                    console.log("End of game");
-                    this.onGameEnd();
-                }
             }
         });
 
@@ -136,6 +133,7 @@ class Game {
             // Get average pitches
             let avgPitch = beats[newBarIndex].averagePitch;
             let nPitches = beats[newBarIndex].numberOfPitches;
+            let sectionIndex = beats[newBarIndex].sectionIndex;
 
             if (avgPitch == 0)
                 avgPitch = this.lastAveragePitch;
@@ -144,8 +142,14 @@ class Game {
 
             // Spawning new obstacle
             var factor = beats[newBarIndex].confidence;
-            var radius = factor * (this.windowWidth / 5) + 2;
-            this.addObstacle(radius, avgPitch);
+            var radius = Math.max(factor * (this.windowWidth / 7), 15);
+            this.addObstacle(radius, avgPitch, sectionIndex % 2);
+        }
+
+        if (this.obstacles.length == 0 && this.status.barIndex == beats.length - 1) {
+            // Game ended
+            console.log("End of game");
+            this.onGameEnd();
         }
     }
 
@@ -202,6 +206,19 @@ class Game {
         }
         for (var x = 0; x < beats.length; x++) {
             beats[x].averagePitch = (beats[x].averagePitch - minPitch) / (maxPitch - minPitch);
+        }
+
+        // Set current section
+        let sections = this.track.analysis.sections;
+        for (var x = 0; x < beats.length; x++) {
+            let beatStart = beats[x].start;
+            for (var i = 0; i < sections.length; i++) {
+                let secStart = sections[i].start;
+                if (secStart >= beatStart) {
+                    beats[x].sectionIndex = i;
+                    break;
+                }
+            }
         }
     }
 
@@ -283,15 +300,14 @@ class Game {
 
     addScore() {
         let scoreText = new PIXI.Text("",
-                          {
-                            fontFamily : 'Visitor',
-                            fontSize: 20,
-                            //fontWeight: 'bold',
-                            fill: this.color.complement
-                        }
+            {
+                fontFamily : 'Visitor',
+                fontSize: 28,
+                fill: this.color.complement
+            }
         );
-        scoreText.x = 20;
-        scoreText.y = 20;
+        scoreText.x = this.app.renderer.width - scoreText.width - 20;
+        scoreText.y = 25;
         this.app.stage.addChild(scoreText);
         this.elements.score = scoreText;
         this.updateScore();
@@ -300,15 +316,13 @@ class Game {
     addOuch() {
         let ouchText = new PIXI.Text("YUM!",
             {
-                //TODO: Add Font
                 fontFamily : 'Visitor',
                 fontSize: 30,
-                //fontWeight: 'bold',
-                fill: 0x00FF00
+                fill: 0x33CC33
             }
         );
         ouchText.visible = false;
-        ouchText.x = this.app.renderer.width / 2 - 50;
+        ouchText.x = this.app.renderer.width / 2 - ouchText.width / 2;
         ouchText.y = this.app.renderer.height / 2;
         this.app.stage.addChild(ouchText);
         this.elements.ouch = ouchText;
@@ -328,7 +342,7 @@ class Game {
             }
         );
         titleText.x = window.innerWidth / 2 - titleText.width / 2;
-        titleText.y = 20;
+        titleText.y = 25;
         this.app.stage.addChild(titleText);
         this.elements.titleText = titleText;
     }
@@ -337,12 +351,12 @@ class Game {
         let exitText = new PIXI.Text("EXIT",
             {
                 fontFamily : 'Visitor',
-                fontSize: 24,
+                fontSize: 28,
                 //fontWeight: 'bold',
                 fill: this.color.complement
             }
         );
-        exitText.x = this.app.renderer.width - 80;
+        exitText.x = 20;
         exitText.y = 20;
         exitText.interactive = true;
         exitText.buttonMode = true;
@@ -358,15 +372,20 @@ class Game {
             }
           });
         });
+        exitText.on("pointerdown", () => window.location.pathname = "");
         this.app.stage.addChild(exitText);
         this.elements.exit = exitText;
     }
 
-    addObstacle(radius, xPosition) {
+    addObstacle(radius, xPosition, type) {
         var xLimit = this.app.renderer.width;
+        var x = Math.max(Math.min(xLimit * xPosition, xLimit - radius), radius);
         var graphics = new PIXI.Graphics();
         graphics.beginFill(this.color.complement, 1);
-        graphics.drawCircle(xLimit * xPosition, -radius, radius);
+        if (type == 1)
+            graphics.drawCircle(x, -radius, radius);
+        else
+            graphics.drawRoundedRect(x, -radius, radius * 2, radius * 2, radius / 2);
 
         this.app.stage.addChild(graphics);
         this.obstacles.push(graphics);
@@ -377,10 +396,11 @@ class Game {
     }
 
     isPlayerColliding() {
-        var playerX = this.elements.player.x;
-        var playerY = this.elements.player.y;
-        var playerWidth = this.playerRadius * 2;
-        var playerHeight = this.playerRadius * 2;
+        var pb = this.elements.player.getBounds();
+        var playerX = pb.x;
+        var playerY = pb.y;
+        var playerWidth = pb.width;
+        var playerHeight = pb.height;
         for (var i = 0; i < this.obstacles.length; i++) {
             var ob = this.obstacles[i].getBounds();
             var isColiding = ob.x + ob.width > playerX &&
@@ -403,8 +423,8 @@ class Game {
             this.obstacles.splice(index, 1);
             this.elements.player.y = this.app.renderer.height - this.playerRadius * 2.5
             this.elements.player.rotation -= 0.3
-            this.elements.player.tint = 0x00FF00;
-            this.elements.score.style.fill = 0x00FF00;
+            this.elements.player.tint = 0x33CC33;
+            this.elements.score.style.fill = 0x33CC33;
             this.elements.ouch.visible = true;
         } else if(this.elements.ouch.visible && !this.isDamaging) {
             setTimeout(() => {
@@ -422,15 +442,14 @@ class Game {
         this.windowWidth = parent.clientWidth;
         this.app.renderer.resize(parent.clientWidth, parent.clientHeight);
         this.elements.player.position.set(this.app.renderer.width * 0.5, this.app.renderer.height - this.playerRadius * 2);
-        this.elements.exit.position.set(this.app.renderer.width - 80, 20);
-        this.elements.titleText.position.set(window.innerWidth / 2 - this.elements.titleText.width / 2, 20);
-        this.elements.ouch.position.set(this.app.renderer.width / 2 - 50, this.app.renderer.height / 2);
+        this.elements.score.position.set(this.app.renderer.width - this.elements.score.width - 20, 20);
+        //this.elements.titleText.position.set(window.innerWidth / 2 - this.elements.titleText.width / 2, 20);
+        this.elements.ouch.position.set(this.app.renderer.width / 2 - this.elements.ouch.width / 2, this.app.renderer.height / 2);
         console.log("Using width: ", this.app.renderer.width, " and height: ", this.app.renderer.height);
     }
 }
 var gameViewElement = document.getElementById('game-view');
 let track = Cookies.get("track_id");
-console.log("track")
 let game;
 let accessToken = Cookies.get("access_token")
 if(track && accessToken){
@@ -438,9 +457,11 @@ if(track && accessToken){
   $.get({url: '/trackInfo', headers:{"Authorization": `Bearer ${accessToken}`}, data: {track_id: track}}, function(data){
     game = new Game(gameViewElement, data);
     game.resize();
+    // Plays on external device only if the cookie exists
     play(Cookies.get('track_id'), Cookies.get('ext_device_id'))
     .then(() => {
         game.start();
+        gameViewElement.style.opacity = 1;
     })
     .catch(() => {
       console.log("NOO");
