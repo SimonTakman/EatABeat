@@ -79,29 +79,13 @@ app.get('/trackInfo', function (request, response) {
   var trackInfo = {features: {}, analysis: {}, track: {}};
   var loggedInSpotifyApi = new SpotifyWebApi();
   loggedInSpotifyApi.setAccessToken(request.headers['authorization'].split(' ')[1]);
-  /* Get Audio Features for a Track */
-  loggedInSpotifyApi.getAudioFeaturesForTrack(request.query.track_id)
-    .then(function(data) {
-      trackInfo.features = data.body;
-      /* Get Audio Analysis for a Track */
-      loggedInSpotifyApi.getAudioAnalysisForTrack(request.query.track_id)
-        .then(function(data) {
-          trackInfo.analysis = data.body;
-          loggedInSpotifyApi.getTrack(request.query.track_id)
-            .then(function(data) {
-              trackInfo.track = data.body;
-              response.send(trackInfo);
-              //console.log(data.body);
-            }, function(err) {
-              console.log(err);
-            });
-          //console.log(data.body);
-        }, function(err) {
-          console.log(err);
-        });
-    }, function(err) {
-      console.log(err);
-    });
+  
+  // Get all data
+  var featPromise = loggedInSpotifyApi.getAudioFeaturesForTrack(request.query.track_id).then(data => trackInfo.features = data.body);
+  var analysisPromise = loggedInSpotifyApi.getAudioAnalysisForTrack(request.query.track_id).then(data => trackInfo.analysis = data.body);
+  var trackPromise = loggedInSpotifyApi.getTrack(request.query.track_id).then(data => trackInfo.track = data.body);
+
+  return Promise.all([featPromise, analysisPromise, trackPromise]).then(() => response.send(trackInfo)).catch(err => console.error(err));
 });
 
 app.get('/me', function(request, response) {
