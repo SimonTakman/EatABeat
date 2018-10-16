@@ -30,12 +30,12 @@ Developed using the following technologies:
 * [Pixie.js](https://github.com/pixijs/pixi.js)
 * Spotify Player
 * [Cookie.js](https://github.com/js-cookie/js-cookie)
-* [Pixi Particles](https://github.com/pixijs/pixi-particles)
+* [Particles](https://vincentgarreau.com/particles.js/)
 
 ## Setup & run
 If you want to run this yourself, here are the steps:
 1. Clone this reposity
-2. Create a file '.env' in the root of the repository
+2. Create a file `.env` in the root of the repository
 3. Create an application at spotify developer site
-4. Add callback to 'localhost:3000' on the spotify application
-5. Insert your spotify client ID and SECRET inside the '.env' file as "SPOTIFY_ID=..." and "SPOTIFY_SECRET=..."
+4. Add callback to `localhost:3000` on the spotify application
+5. Insert your spotify client ID and SECRET inside the `.env` file as `SPOTIFY_ID=...` and `SPOTIFY_SECRET=...`
