@@ -2,6 +2,7 @@
 // where your node app starts
 
 // init project
+require('dotenv').config()
 var express = require('express');
 var app = express();
 
@@ -32,8 +33,8 @@ var showDialog = true;
 
 // The API object we'll use to interact with the API
 var spotifyApi = new SpotifyWebApi({
-  clientId : '0ff9af57eeaf4b1d9b60956b8eda4994',
-  clientSecret : 'cf9f5afdcb59433f86d71d1c62caf37d',
+  clientId : process.env.SPOTIFY_ID,
+  clientSecret : process.env.SPOTIFY_SECRET,
   redirectUri : redirectUri
 });
 
