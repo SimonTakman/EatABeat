@@ -15,9 +15,9 @@ Summary of game features:
 * The confidence of the beat decides the size of the obstacle
 
 ## Design
-<img src="readme-resources/login.png" width="250" /> <img src="readme-resources/search.png" width="250" /><br/>
-<img src="readme-resources/search-results.png" width="250"/> <img src="readme-resources/game.png" width="250"/><br/>
-<img src="readme-resources/game-point.png" width="250"/> <img src="readme-resources/game-over.png" width="250"/>
+<img src="readme-resources/iphone_login.png" width="250" /> <img src="readme-resources/iphone_search.png" width="250" /><br/>
+<img src="readme-resources/iphone_search_results.png" width="250"/> <img src="readme-resources/iphone_gameplay.png" width="250"/><br/>
+<img src="readme-resources/iphone_gameplay_yum.png" width="250"/> <img src="readme-resources/iphone_gameover.png" width="250"/>
 
 ## Backend
 Developed using node.js with the following technologies:
