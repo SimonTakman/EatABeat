@@ -1,5 +1,5 @@
 # ![Logo](public/assets/Spoti_DarkGreen.png) Eat A Beat
-A 2D game generated from a song, powered by Spotify. This project won 1st place on Spotify DevX Hackathon 2018.
+A 2D game generated from a song, powered by Spotify. This project won 1st place on Spotify DevX Hackathon 2018. The game may be accessed at [eatabeat.herokuapp.com](https://eatabeat.herokuapp.com/).
 
 ## The team
 * Joakim Berntsson
