@@ -142,13 +142,13 @@ class Game {
 
             // Spawning new obstacle
             var factor = beats[newBarIndex].confidence;
-            var radius = Math.max(factor * (this.windowWidth / 7), 15);
+            var radius = Math.max(factor * (Math.min(130, this.windowWidth / 7)), 15);
             this.addObstacle(radius, avgPitch, sectionIndex % 2);
         }
 
         if (this.obstacles.length == 0 && this.status.barIndex == beats.length - 1) {
             // Game ended
-            console.log("End of game");
+            //console.log("End of game");
             this.onGameEnd();
         }
     }
@@ -158,7 +158,7 @@ class Game {
         // Calculate speed from tempo
         let minTempo = 90;
         let maxTempo = 160;
-        console.log(this.track.features.tempo);
+        //console.log(this.track.features.tempo);
         let tempo = Math.max(Math.min(this.track.features.tempo, maxTempo), minTempo)
         let tempoScaled = (tempo - minTempo) / (maxTempo - minTempo);
         this.speed = tempoScaled * 5 + 5;
@@ -166,7 +166,7 @@ class Game {
         // Process segments of each beat to get an average pitch
         let beats = this.track.analysis.beats;
         let segments = this.track.analysis.segments;
-        console.log("Number of beats", beats.length, " and segments ", segments.length);
+        //console.log("Number of beats", beats.length, " and segments ", segments.length);
         for (var x = 0; x < beats.length; x++) {
             let beatStart = beats[x].start;
             let beatEnd = beatStart + beats[x].duration;
@@ -223,7 +223,7 @@ class Game {
     }
 
     lightenColor(colorCode, amount) {
-        console.log("Before", colorCode.toString(16));
+        //console.log("Before", colorCode.toString(16));
         var num = parseInt(colorCode, 16);
 
         var r = (num >> 16) + amount;
@@ -251,7 +251,7 @@ class Game {
         }
 
         let newColor = (g | (b << 8) | (r << 16));
-        console.log("Before", newColor.toString(16));
+        //console.log("Before", newColor.toString(16));
         return newColor;
     }
 
@@ -445,7 +445,7 @@ class Game {
         this.elements.score.position.set(this.app.renderer.width - this.elements.score.width - 20, 20);
         //this.elements.titleText.position.set(window.innerWidth / 2 - this.elements.titleText.width / 2, 20);
         this.elements.ouch.position.set(this.app.renderer.width / 2 - this.elements.ouch.width / 2, this.app.renderer.height / 2);
-        console.log("Using width: ", this.app.renderer.width, " and height: ", this.app.renderer.height);
+        //console.log("Using width: ", this.app.renderer.width, " and height: ", this.app.renderer.height);
     }
 }
 var gameViewElement = document.getElementById('game-view');
@@ -457,14 +457,14 @@ if(track && accessToken){
   $.get({url: '/trackInfo', headers:{"Authorization": `Bearer ${accessToken}`}, data: {track_id: track}}, function(data){
     game = new Game(gameViewElement, data);
     game.resize();
-    // Plays on external device only if the cookie exists
+    // Plays on external device only if the cookie existss
     play(Cookies.get('track_id'), Cookies.get('ext_device_id'))
     .then(() => {
         game.start();
         gameViewElement.style.opacity = 1;
     })
     .catch(() => {
-      console.log("NOO");
+      //console.log("NOO");
       Cookies.remove("ext_device_id");
       refreshPage();
     });

@@ -8,12 +8,11 @@ var access_token, device_id; // Device id used for playback SDK
 //$('#loggedIn').hide();
 //$('#loggedOut').hide();
 $('#searchResults').hide();
-$('#connect').hide();
 
 $('#login').click(function() {
   // Call the authorize endpoint, which will return an authorize URL, then redirect to that URL
   $.get('/authorize', function(data) {
-    console.log(data)
+    //console.log(data)
     window.location = data;
   });
 });
@@ -77,7 +76,7 @@ if (access_token) {
       }
       Cookies.set("display_name", data.display_name);
       $('#displayName').text(data.display_name);
-      console.log("Fetched user info");
+      //console.log("Fetched user info");
     });
   }
 }
@@ -139,7 +138,7 @@ function search() {
         card.appendTo('#searchResults');
       });
       $('#searchResults').fadeIn(500);
-      console.log(data);
+      //console.log(data);
     });
   });
 }

@@ -19,7 +19,7 @@ function checkDevices() {
       //console.log(data);
       if (data.devices.length > 0) {
         data.devices.forEach(function(device) {
-          var dev = $('<a href="#"><h4>' + device.name + '</h4></a>');
+          var dev = $('<a href="#"><h4>' + device.name + ' (' + device.type + ')</h4></a>');
           dev.on('click', function() {
             $('#devices').fadeOut(500, function() {
               Cookies.set("ext_device_id", device.id);

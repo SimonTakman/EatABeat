@@ -56,35 +56,14 @@ main {
   transform: translate(-50%, 0);
 }
 
-.btn-primary {
-  background-color: #29977F;
-  color: #FFC858;
+.btn-primary, .btn-primary:active, .btn-primary:link, .btn-primary:visited {
+  background-color: #29977F !important;
+  color: #FFC858 !important;
 }
 
 .btn-primary:hover {
-  background-color: #53AA97;
-  color: #FFC858;
-}
-
-.btn-primary:active {
-  background-color: #29977F;
-  color: #FFC858;
-}
-
-#connect {
-  position:absolute;
-  top: 350px;
-  left: 50%;
-  -webkit-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
-}
-
-#resume {
-  position:absolute;
-  top: 100px;
-  left: 50%;
-  -webkit-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
+  background-color: #53AA97 !important;
+  color: #FFC858 !important;
 }
 
 #loggedOut {
@@ -96,8 +75,19 @@ main {
   text-align: center;
 }
 
-#loggedIn {
+#userInfo {
+  position: absolute;
+  height: 40px;
+  width: 50%;
+  margin-top: 5px;
+  text-align: left;
+}
 
+#displayName {
+  height: 100%;
+  float:left;
+  position: absolute;
+  margin: 10px 0 0 50px;
 }
 
 #searchBox {

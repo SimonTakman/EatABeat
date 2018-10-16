@@ -31,19 +31,22 @@ main {
   transition:opacity 1000ms;
 }
 
-.btn-primary {
-  background-color: #29977F;
-  color: #FFC858;
+.btn-primary, .btn-primary:active, .btn-primary:link, .btn-primary:visited {
+  background-color: #29977F !important;
+  color: #FFC858 !important;
 }
 
 .btn-primary:hover {
-  background-color: #53AA97;
-  color: #FFC858;
+  background-color: #53AA97 !important;
+  color: #FFC858 !important;
 }
 
-.btn-primary:active {
-  background-color: #29977F;
-  color: #FFC858;
+a, a:active, a:link, a:visited {
+  color: #29977F !important;
+}
+
+a:hover {
+  color: #53AA97 !important;
 }
 
 #devices {
