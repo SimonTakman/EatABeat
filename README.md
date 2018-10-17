@@ -33,7 +33,7 @@ Developed using the following technologies:
 * [Particles](https://vincentgarreau.com/particles.js/)
 
 ## Setup & run
-If you want to run this yourself, here are the steps:
+If you want to run this yourself, follow the following steps:
 1. Clone this reposity
 2. Create a file `.env` in the root of the repository
 3. Create an application at spotify developer site
